@@ -12,4 +12,22 @@ class DisplayController extends Controller
     {
         return view('index');
     }
+
+    //
+    public function contact()
+    {
+        return view('contact');
+    }
+
+	//
+    public function menu()
+    {
+        return view('menu');
+    }
+
+    //
+    public function services()
+    {
+        return view('services');
+    }
 }

@@ -15,21 +15,20 @@
 			</div>
 			<div class="col-xs-8 text-right menu-1">
 				<ul>
-					<li><a href="menu.html">Menu</a></li>
+					<li><a href="menu">Menu</a></li>
 					<li class="has-dropdown">
-						<a href="services.html">Services</a>
+						<a href="services">Services</a>
 						<ul class="dropdown">
 							<li><a href="#">Food Catering</a></li>
 							<li><a href="#">Wedding Celebration</a></li>
 							<li><a href="#">Birthday's Celebration</a></li>
 						</ul>
 					</li>
-					<li><a href="contact.html">Contact</a></li>
+					<li><a href="contact">Contact</a></li>
 					<li class="btn-cta"><a href="#"><span>Reservation</span></a></li>
 				</ul>	
 			</div>
 		</div>
-		
 	</div>
 </nav>
 
@@ -224,7 +223,6 @@
 </div>
 <div class="copyrights">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
 
-
 <div class="gtco-cover gtco-cover-sm" style="background-image: url(images/img_bg_1.jpg)"  data-stellar-background-ratio="0.5">
 	<div class="overlay"></div>
 	<div class="gtco-container text-center">
@@ -239,7 +237,7 @@
 
 <div id="gtco-counter" class="gtco-section">
 	<div class="gtco-container">
-		<div class="row">
+		<div class="row">0
 			<div class="col-md-8 col-md-offset-2 text-center gtco-heading animate-box">
 				<h2 class="cursive-font primary-color">Fun Facts</h2>
 				<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
@@ -303,7 +301,6 @@
 @include('includes.footer')
 
 </body>
-</html>
 <script type="text/javascript">
     $(function() {
         $.getJSON("/api/category/list", function(data) {
@@ -312,3 +309,4 @@
         });
     });
 </script>
+</html>
