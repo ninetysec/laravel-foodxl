@@ -2,17 +2,13 @@
 	<div class="overlay"></div>
 	<div class="gtco-container">
 		<div class="row row-pb-md">
-
-			
-
-			
 			<div class="col-md-12 text-center">
 				<div class="gtco-widget">
 					<h3>Get In Touch</h3>
 					<ul class="gtco-quick-contact">
-						<li><a href="#"><i class="icon-phone"></i> +1 234 567 890</a></li>
-						<li><a href="#"><i class="icon-mail2"></i> info@GetTemplates.co</a></li>
-						<li><a href="#"><i class="icon-chat"></i> Live Chat</a></li>
+						<li><a href="#"><i class="icon-phone"></i>01.47.91.31.30</a></li>
+						<li><a href="#"><i class="icon-mail2"></i>5 parivs Pierre de Coubertin - 92600 ASNIERES</a></li>
+						<!-- <li><a href="#"><i class="icon-chat"></i> Live Chat</a></li> -->
 					</ul>
 				</div>
 				<div class="gtco-widget">
@@ -27,7 +23,7 @@
 			</div>
 
 			<div class="col-md-12 text-center copyright">
-				<p><small class="block">&copy; 2018 FoodXL. All Rights Reserved.</small></p>
+				<p><small class="block">&copy; 2018 FOODXL. All Rights Reserved.</small></p>
 			</div>
 
 		</div>

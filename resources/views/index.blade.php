@@ -99,7 +99,7 @@
 				<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" id="menu"> 
 			<div class="col-lg-4 col-md-4 col-sm-6">
 				<a href="images/img_1.jpg" class="fh5co-card-item image-popup">
 					<figure>
@@ -110,71 +110,6 @@
 						<h2>Fresh Mushrooms</h2>
 						<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
 						<p><span class="price cursive-font">$19.15</span></p>
-					</div>
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-6">
-				<a href="images/img_2.jpg" class="fh5co-card-item image-popup">
-					<figure>
-						<div class="overlay"><i class="ti-plus"></i></div>
-						<img src="images/img_2.jpg" alt="Image" class="img-responsive">
-					</figure>
-					<div class="fh5co-text">
-						<h2>Cheese and Garlic Toast</h2>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-						<p><span class="price cursive-font">$20.99</span></p>
-					</div>
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-6">
-				<a href="images/img_3.jpg" class="fh5co-card-item image-popup">
-					<figure>
-						<div class="overlay"><i class="ti-plus"></i></div>
-						<img src="images/img_3.jpg" alt="Image" class="img-responsive">
-					</figure>
-					<div class="fh5co-text">
-						<h2>Grilled Chiken Salad</h2>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-						<p><span class="price cursive-font">$8.99</span></p>
-					</div>
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-6">
-				<a href="images/img_4.jpg" class="fh5co-card-item image-popup">
-					<figure>
-						<div class="overlay"><i class="ti-plus"></i></div>
-						<img src="images/img_4.jpg" alt="Image" class="img-responsive">
-					</figure>
-					<div class="fh5co-text">
-						<h2>Organic Egg</h2>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-						<p><span class="price cursive-font">$12.99</span></p>
-					</div>
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-6">
-				<a href="images/img_5.jpg" class="fh5co-card-item image-popup">
-					<figure>
-						<div class="overlay"><i class="ti-plus"></i></div>
-						<img src="images/img_5.jpg" alt="Image" class="img-responsive">
-					</figure>
-					<div class="fh5co-text">
-						<h2>Tomato Soup with Chicken</h2>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-						<p><span class="price cursive-font">$23.10</span></p>
-					</div>
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-6">
-				<a href="images/img_6.jpg" class="fh5co-card-item image-popup">
-					<figure>
-						<div class="overlay"><i class="ti-plus"></i></div>
-						<img src="images/img_6.jpg" alt="Image" class="img-responsive">
-					</figure>
-					<div class="fh5co-text">
-						<h2>Salad with Crispy Chicken</h2>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-						<p><span class="price cursive-font">$5.59</span></p>
 					</div>
 				</a>
 			</div>
@@ -303,10 +238,34 @@
 </body>
 <script type="text/javascript">
     $(function() {
-        $.getJSON("/api/category/list", function(data) {
-            // var parsedJson = $.parseJSON(data);
-            console.log(data);
-        });
-    });
+		//需要修改
+        $.get("/api/category/list", function(data) {
+			var obj={
+				"goods_img":"/uploads/images/2018-04/1523521513.jpg",
+				"goods_name": "测试显示",
+				"shop_price":25
+			}
+			for(var i = 0;i<data.length;i++){
+				$('#menu').append(getMenu(obj));
+			}
+		});
+	});
+	
+	function getMenu(obj){
+		var tmp = `<div class="col-lg-4 col-md-4 col-sm-6">
+				<a href="`+obj.goods_img+`" class="fh5co-card-item image-popup">
+					<figure>
+						<div class="overlay"><i class="ti-plus"></i></div>
+						<img src="`+obj.goods_img+`" alt="Image" class="img-responsive">
+					</figure>
+					<div class="fh5co-text">
+						<h2>`+obj.goods_name+`</h2>
+						<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
+						<p><span class="price cursive-font">`+obj.shop_price+`</span></p>
+					</div>
+				</a>
+			</div>`;
+		return tmp;
+	}
 </script>
 </html>
