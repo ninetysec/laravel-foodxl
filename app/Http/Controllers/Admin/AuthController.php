@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Admin;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Http\Request;
 use Validator;
-use App\Http\Requests;
 use Auth;
 use Redirect;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
+use App\Http\Requests;
+use App\Model\Admin\Admin;
 
 class AuthController extends Controller
 {
@@ -55,8 +55,7 @@ class AuthController extends Controller
             'password' => '密码'
         ]);
     }
-
-    //退出登录
+    //退出登录  
     public function logout()
     {
         if(Auth::guard('admin')->user()){

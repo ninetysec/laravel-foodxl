@@ -109,10 +109,4 @@ class Goods extends Model
     {
         return $this->hasOne('App\GoodsAttr', 'goods_id', 'goods_id');
     }
-/*
-    public function getCatNameAttribute()
-    {
-        return Category::where('cat_id',$this->cat_id)->value('cat_name');
-    }
-*/
 }
