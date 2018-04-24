@@ -21,7 +21,7 @@ class OrderController extends Controller
 
         $data = Order::getList($validated);
 
-        return response()->json($data);
+        return view('admin.order_list',$data);
     }
 
     //
@@ -35,6 +35,6 @@ class OrderController extends Controller
 
         $data = Order::info($validated);
 
-        return response()->json($data);
+        return view('admin.order_info',$data);
     }
 }

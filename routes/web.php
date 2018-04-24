@@ -103,19 +103,23 @@ Route::group(['middleware' => 'web'], function () {
 
 		    Route::get('order/info', 'OrderController@info');
 
-		    Route::get('order/act', 'OrderController@act');
+		    Route::post('order/act', 'OrderController@act');
 
 		    Route::get('category/list', 'CategoryController@getList');
 
 		    Route::get('category/info', 'CategoryController@info');
 
-		    Route::get('category/act', 'CategoryController@act');
+		    Route::get('category/add', 'CategoryController@add');
+
+		    Route::post('category/act', 'CategoryController@act');
 
 		    Route::get('goods/list', 'GoodsController@getList');
 
 		    Route::get('goods/info', 'GoodsController@info');
 
-		    Route::get('goods/act', 'GoodsController@act');
+		    Route::get('goods/add', 'GoodsController@add');
+
+		    Route::post('goods/act', 'GoodsController@act');
 		});
 	});
 });

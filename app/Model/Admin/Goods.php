@@ -3,6 +3,7 @@
 namespace App\Model\Admin;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Goods extends Model
 {
@@ -41,9 +42,28 @@ class Goods extends Model
     	return $model;
     }
 
-    public static function act(array $attributes)
+    public static function act(Request $request, array $attributes)
     {
         extract($attributes);
+
+        var_dump($request->hasFile('image'));
+
+        if ($request->hasFile('image')) {
+
+            $request->file('image');
+
+            $file_name = 'goods_'.time().'.jpg';
+
+            var_dump($file_name);
+
+            if($request->image->move('/uploads/images/goods/',$file_name)) {
+
+                $path = '/uploads/images/goods/'.$file_name;
+
+                var_dump($path);
+
+            }
+        }
 
         if ($action == 'insert')
         {
@@ -62,8 +82,9 @@ class Goods extends Model
                 'goods_name'   => $name,
                 'goods_desc'   => isset($desc) ? $desc : '',
                 'shop_price'   => isset($price) ? $price : 0,
-                'is_on_sale'   => isset($is_on_sale) ? $is_on_sale : 1,
+                'is_on_sale'   => isset($is_on_sale) ? $is_on_sale : 0,
                 'sort_order'   => isset($sort_order) ? $sort_order : 0,
+                'goods_img'  => isset($path) ? $path : '',
                 'add_time'     => time(),
             ];
 
@@ -90,11 +111,12 @@ class Goods extends Model
 
             if (!is_null($model = self::where('goods_id',$id)->first()))
             {
-                $model->goods_name = $name;
-                $model->goods_desc = isset($desc) ? $desc : ' ';
-                $model->shop_price = isset($price) ? $price : 0;
-                $model->is_on_sale = isset($is_on_sale) ? $is_on_sale : 1;
-                $model->sort_order = isset($sort_order) ? $sort_order : 0;
+                $model->goods_name  = $name;
+                $model->goods_desc  = isset($desc) ? $desc : ' ';
+                $model->shop_price  = isset($price) ? $price : 0;
+                $model->is_on_sale  = isset($is_on_sale) ? $is_on_sale : 0;
+                $model->sort_order  = isset($sort_order) ? $sort_order : 0;
+                $model->goods_img   = isset($path) ? $path : $model->goods_img;
 
                 if (isset($cat_id) && !is_null(self::where('cat_id',$cat_id)->first())) $model->cat_id = $cat_id;
 
@@ -107,6 +129,6 @@ class Goods extends Model
 
     public function GoodsAttr()
     {
-        return $this->hasOne('App\GoodsAttr', 'goods_id', 'goods_id');
+        return $this->hasMany('App\Model\Admin\GoodsAttr', 'goods_id', 'goods_id');
     }
 }

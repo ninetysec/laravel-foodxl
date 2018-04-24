@@ -12,7 +12,7 @@ class Order extends Model
 
     public    $timestamps = false;
 
-    // protected $appends = ['cat_name'];
+    // protected $appends = ['order_user'];
     // protected $visible = ['id', 'change', 'reason', 'created_at', 'money', 'user_id', 'user_name', 'level', 'customer', 'customer_id', 'customer_level'];
 
     // 订单状态
@@ -32,6 +32,7 @@ class Order extends Model
         $per_page = isset($per_page) ? $per_page : 20;
         
         $model = self::orderBy('add_time', 'DESC')
+                ->with('contact')
                 ->paginate($per_page)
                 ->toArray();
 
@@ -42,7 +43,7 @@ class Order extends Model
     {
         extract($attributes);
 
-        if (!is_null($model = self::where('order_id',$id)->with('order_goods')->first()))
+        if (!is_null($model = self::where('order_id',$id)->with('order_goods')->with('contact')->first()))
         {
             $model = $model->toArray();
         }
@@ -60,6 +61,11 @@ class Order extends Model
 
     public function order_goods()
     {
-        return $this->hasOne('App\OrderGoods', 'order_id', 'order_id');
+        return $this->hasMany('App\Model\Admin\OrderGoods', 'order_id', 'order_id');
+    }
+
+    public function contact()
+    {
+        return $this->hasOne('App\Model\Admin\Contact', 'id', 'contact_id');
     }
 }

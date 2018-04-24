@@ -20,7 +20,7 @@ class CategoryController extends Controller
 
         $data = Category::getList($validated);
 
-        return response()->json($data);
+        return view('admin.category_list',$data);
     }
 
     //
@@ -34,7 +34,13 @@ class CategoryController extends Controller
 
         $data = Category::info($validated);
 
-        return response()->json($data);
+        return view('admin.category_info',$data);
+    }
+
+    //
+    public function add()
+    {
+        return view('admin.category_add');
     }
 
     //

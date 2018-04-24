@@ -3,6 +3,7 @@
 namespace App\Model\Admin;
 
 use Illuminate\Database\Eloquent\Model;
+use Redirect;
 
 class Category extends Model
 {
@@ -79,6 +80,6 @@ class Category extends Model
 
     public function son()
     {
-        return $this->hasOne('App\Category', 'parent_id', 'cat_id');
+        return $this->hasMany('App\Model\Admin\Category', 'parent_id', 'cat_id');
     }
 }

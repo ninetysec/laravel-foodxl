@@ -20,7 +20,7 @@ class GoodsController extends Controller
 
         $data = Goods::getList($validated);
 
-        return response()->json($data);
+        return view('admin.goods_list',$data);
     }
 
     //
@@ -34,18 +34,24 @@ class GoodsController extends Controller
 
         $data = Goods::info($validated);
 
-        return response()->json($data);
+        return view('admin.goods_info',$data);
+    }
+
+    //
+    public function add()
+    {
+        return view('admin.goods_add');
     }
 
     //
     public function act(Request $request)
     {
         $rules = [
-                    'action'     => 'required|string|min:1',
-                    'id'         => 'integer|min:1',
-                    'cat_id'     => 'integer|min:1',
-                    'name'       => 'required|string|min:1',
-                    'desc'       => 'string|min:1',
+                    'action'     => 'required|string',
+                    'id'         => 'integer',
+                    'cat_id'     => 'integer',
+                    'name'       => 'required|string',
+                    'desc'       => 'string',
                     'price'      => 'string',
                     'is_on_sale' => 'integer',
                     'sort_order' => 'integer',
@@ -54,7 +60,9 @@ class GoodsController extends Controller
 
         $validated = $request->validate($rules);
 
-        $data = Goods::act($validated);
+        var_dump($request->hasFile('avatar'));
+
+        $data = Goods::act($request,$validated);
 
         return response()->json($data);
     }
