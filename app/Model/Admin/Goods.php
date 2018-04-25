@@ -3,6 +3,7 @@
 namespace App\Model\Admin;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class Goods extends Model
@@ -15,7 +16,7 @@ class Goods extends Model
 
     public    $timestamps = false;
 
-    // protected $appends = ['cat_name'];
+    protected $appends = ['cat_name'];
 
     // protected $visible = ['id', 'change', 'reason', 'created_at', 'money', 'user_id', 'user_name', 'level', 'customer', 'customer_id', 'customer_level'];\
 
@@ -42,11 +43,18 @@ class Goods extends Model
     	return $model;
     }
 
-    public static function act(Request $request, array $attributes)
+    public static function status(array $attributes)
     {
         extract($attributes);
 
-        var_dump($request->hasFile('image'));
+        self::where('goods_id',$id)->update([$action => $value]);
+
+        return true;
+    }
+
+    public static function act(Request $request, array $attributes)
+    {
+        extract($attributes);
 
         if ($request->hasFile('image')) {
 
@@ -54,13 +62,9 @@ class Goods extends Model
 
             $file_name = 'goods_'.time().'.jpg';
 
-            var_dump($file_name);
-
-            if($request->image->move('/uploads/images/goods/',$file_name)) {
+            if($request->image->move('./uploads/images/goods/',$file_name)) {
 
                 $path = '/uploads/images/goods/'.$file_name;
-
-                var_dump($path);
 
             }
         }
@@ -84,7 +88,7 @@ class Goods extends Model
                 'shop_price'   => isset($price) ? $price : 0,
                 'is_on_sale'   => isset($is_on_sale) ? $is_on_sale : 0,
                 'sort_order'   => isset($sort_order) ? $sort_order : 0,
-                'goods_img'  => isset($path) ? $path : '',
+                'goods_img'    => isset($path) ? $path : '',
                 'add_time'     => time(),
             ];
 
@@ -117,8 +121,7 @@ class Goods extends Model
                 $model->is_on_sale  = isset($is_on_sale) ? $is_on_sale : 0;
                 $model->sort_order  = isset($sort_order) ? $sort_order : 0;
                 $model->goods_img   = isset($path) ? $path : $model->goods_img;
-
-                if (isset($cat_id) && !is_null(self::where('cat_id',$cat_id)->first())) $model->cat_id = $cat_id;
+                $model->cat_id      = isset($cat_id) ? $cat_id : $model->cat_id;
 
                 if ($model->save()); return true;
             }
@@ -130,5 +133,10 @@ class Goods extends Model
     public function GoodsAttr()
     {
         return $this->hasMany('App\Model\Admin\GoodsAttr', 'goods_id', 'goods_id');
+    }
+
+    public function getCatNameAttribute()
+    {
+        return Category::where('cat_id',$this->cat_id)->value('cat_name');
     }
 }

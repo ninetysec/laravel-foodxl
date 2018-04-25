@@ -34,23 +34,27 @@ class CategoryController extends Controller
 
         $data = Category::info($validated);
 
-        return view('admin.category_info',$data);
+        $cat = Category::where('parent_id',0)->get();
+
+        return view('admin.category_info',['data' => $data, 'cat' => $cat]);
     }
 
     //
     public function add()
     {
-        return view('admin.category_add');
+        $cat = Category::where('parent_id',0)->get();
+        
+        return view('admin.category_add',['cat' => $cat]);
     }
 
     //
     public function act(Request $request)
     {
         $rules = [
-                    'action'     => 'required|string|min:1',
-                    'id'         => 'integer|min:1',
-                    'name'       => 'required|string|min:1',
-                    'desc'       => 'string|min:1',
+                    'action'     => 'required|string',
+                    'id'         => 'integer',
+                    'name'       => 'required|string',
+                    'desc'       => 'string',
                     'parent_id'  => 'integer',
                     'sort_order' => 'integer',
                 ];

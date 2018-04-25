@@ -119,6 +119,8 @@ Route::group(['middleware' => 'web'], function () {
 
 		    Route::get('goods/add', 'GoodsController@add');
 
+		    Route::get('goods/status', 'GoodsController@status');
+
 		    Route::post('goods/act', 'GoodsController@act');
 		});
 	});

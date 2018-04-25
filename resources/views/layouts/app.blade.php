@@ -72,5 +72,14 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript">
+    $("#is_on_sale").change(function() { 
+        if ($('#is_on_sale').attr('checked')) {
+            alert('选中');
+        } else {
+            alert('未选中');
+        }
+    });
+    </script>
 </body>
 </html>

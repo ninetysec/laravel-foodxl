@@ -100,6 +100,7 @@
 			</div>
 		</div>
 		<div class="row" id="menu"> 
+			<!--
 			<div class="col-lg-4 col-md-4 col-sm-6">
 				<a href="images/img_1.jpg" class="fh5co-card-item image-popup">
 					<figure>
@@ -113,6 +114,7 @@
 					</div>
 				</a>
 			</div>
+			-->
 		</div>
 	</div>
 </div>
@@ -238,15 +240,19 @@
 </body>
 <script type="text/javascript">
     $(function() {
-		//需要修改
-        $.get("/api/category/list", function(data) {
+		// 需要修改
+        $.get("/api/category/info?id=1", function(data) {
+        	/*
 			var obj={
 				"goods_img":"/uploads/images/2018-04/1523521513.jpg",
 				"goods_name": "测试显示",
 				"shop_price":25
 			}
+			*/
+			console.log(data);
 			for(var i = 0;i<data.length;i++){
-				$('#menu').append(getMenu(obj));
+				$('#menu').append(getMenu(data[i]));
+				if (i == 6) {break;}
 			}
 		});
 	});
@@ -261,7 +267,7 @@
 					<div class="fh5co-text">
 						<h2>`+obj.goods_name+`</h2>
 						<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-						<p><span class="price cursive-font">`+obj.shop_price+`</span></p>
+						<p><span class="price cursive-font">€`+obj.shop_price+`</span></p>
 					</div>
 				</a>
 			</div>`;

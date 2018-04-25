@@ -18,9 +18,18 @@
 		            	<td>{{ $cat['cat_id'] }}</td>
 		            	<td>{{ $cat['cat_name'] }}</td>
 		            	<td>{{ $cat['cat_desc'] }}</td>
-		            	<td>{{ $cat['sort_order'] }}</td>
+		            	<td><input type="text" name="sort_order" value="{{ $cat['sort_order'] }}" size="1" /></td>
 		            	<td><a href="info?id={{ $cat['cat_id'] }}">编辑</a> | <a href="info?id={{ $cat['cat_id'] }}">删除</a></td>
 		            </tr>
+		            	@foreach ($cat['son'] as $son)
+			            <tr>
+			            	<td>{{ $son['cat_id'] }}</td>
+			            	<td> |— {{ $son['cat_name'] }}</td>
+			            	<td>{{ $son['cat_desc'] }}</td>
+			            	<td><input type="text" name="sort_order" value="{{ $son['sort_order'] }}" size="1" /></td>
+			            	<td><a href="info?id={{ $son['cat_id'] }}">编辑</a> | <a href="info?id={{ $son['cat_id'] }}">删除</a></td>
+			            </tr>
+		            	@endforeach
 		            @endforeach
 	            </table>
 	        </div>

@@ -4,11 +4,16 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            @if (session('status'))
-                <div class="tools-alert tools-alert-green">
-                    {{ session('status') }}
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
             @endif
+            
             <div class="panel panel-default">
             	<div class="bs-example">
 		        	<form action="act" method="post" class="form-horizontal">
@@ -29,7 +34,11 @@
 		        		<div class="form-group">
 		        			<label class="col-md-4 control-label">上级：</label>
 			        		<div class="col-md-4">
-			        			<input name="parent_id" value="" type="text" class="form-control" />
+			        			<select name='parent_id'>
+			        				@foreach ($cat as $c)
+			        				<option value="{{ $c['cat_id'] }}">{{ $c['cat_name'] }}</option>
+			        				@endforeach
+			        			</select>
 			        		</div>
 			        	</div>
 		        		<div class="form-group">

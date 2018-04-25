@@ -34,7 +34,11 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">分类：</label>
                             <div class="col-md-4">
-                                <input name="cat_id" value="" type="text" class="form-control" />
+                                <select name='cat_id'>
+                                    @foreach ($cat as $c)
+                                    <option value="{{ $c['cat_id'] }}">{{ $c['cat_name'] }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">

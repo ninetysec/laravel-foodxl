@@ -29,7 +29,6 @@ class Category extends Model
                 ->orderBy('cat_id', 'DESC')
                 ->paginate($per_page)
                 ->toArray();
-
     	return $model;
     }
 

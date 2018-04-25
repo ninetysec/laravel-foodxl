@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\Goods;
+use App\Model\Admin\Category;
 
 class GoodsController extends Controller
 {
@@ -34,13 +35,17 @@ class GoodsController extends Controller
 
         $data = Goods::info($validated);
 
-        return view('admin.goods_info',$data);
+        $cat = Category::get();
+
+        return view('admin.goods_info',['data' =>$data, 'cat' => $cat]);
     }
 
     //
     public function add()
     {
-        return view('admin.goods_add');
+        $cat = Category::get();
+
+        return view('admin.goods_add',['cat' => $cat]);
     }
 
     //
@@ -60,9 +65,23 @@ class GoodsController extends Controller
 
         $validated = $request->validate($rules);
 
-        var_dump($request->hasFile('avatar'));
-
         $data = Goods::act($request,$validated);
+
+        return response()->json($data);
+    }
+
+    //
+    public function status(Request $request)
+    {
+        $rules = [
+                    'action'     => 'required|string',
+                    'id'         => 'integer',
+                    'value'      => 'integer'
+                ];
+
+        $validated = $request->validate($rules);
+
+        $data = Goods::status($validated);
 
         return response()->json($data);
     }
