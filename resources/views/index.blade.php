@@ -15,7 +15,8 @@
 			</div>
 			<div class="col-xs-8 text-right menu-1">
 				<ul>
-					<li><a href="menu">Menu</a></li>
+					<li><a href="cart">Cart</a></li>
+					<li><a href="order">Order</a></li>
 					<li class="has-dropdown">
 						<a href="services">Services</a>
 						<ul class="dropdown">
@@ -42,6 +43,7 @@
 						<span class="intro-text-small">Hand-crafted by <a href="http://gettemplates.co" target="_blank">GetTemplates.co</a></span>
 						<h1 class="cursive-font">All in good taste!</h1>	
 					</div>
+					<!--
 					<div class="col-md-4 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
 						<div class="form-wrap">
 							<div class="tab">
@@ -85,6 +87,7 @@
 							</div>
 						</div>
 					</div>
+					-->
 				</div>
 			</div>
 		</div>
@@ -99,7 +102,7 @@
 				<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
 			</div>
 		</div>
-		<div class="row" id="menu"> 
+		<div class="row" id="menu">
 			<!--
 			<div class="col-lg-4 col-md-4 col-sm-6">
 				<a href="images/img_1.jpg" class="fh5co-card-item image-popup">

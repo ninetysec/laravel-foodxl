@@ -16,8 +16,8 @@
 				</div>
 				<div class="col-xs-8 text-right menu-1">
 					<ul>
-						<li class="active"><a href="cart">Cart</a></li>
-						<li><a href="order">Order</a></li>
+						<li><a href="cart">Cart</a></li>
+						<li class="active"><a href="order">Order</a></li>
 						<li class="has-dropdown">
 							<a href="services">Services</a>
 							<ul class="dropdown">
@@ -64,7 +64,7 @@
 		<div class="gtco-container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
-					<h2 class="cursive-font primary-color">购物车</h2>
+					<h2 class="cursive-font primary-color">订单列表</h2>
 				</div>
 			</div>
 			<style type="text/css">
@@ -79,10 +79,11 @@
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>菜品名称</th>
-							<th>单价</th>
-							<th>数量</th>
-							<th>小计</th>
+							<th>订单号</th>
+							<th>状态</th>
+							<th>名称</th>
+							<th>总价</th>
+							<th>时间</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -165,7 +166,7 @@
 	<script type="text/javascript">
 	    $(function() {
 			// 需要修改
-	        $.get("/api/cart/get", function(data) {
+	        $.get("/api/order/list", function(data) {
 	        	/*
 				var obj={
 					"goods_img":"/uploads/images/2018-04/1523521513.jpg",
@@ -223,6 +224,7 @@
 					+obj.goods_name+`</td><td>`
 					+obj.price+`</td><td>`
 					+obj.number+`</td><td>`
+					+obj.price+`</td><td>`
 					+obj.price+`</td><td>`
 					+`x</td></tr>`;
 			return tmp;

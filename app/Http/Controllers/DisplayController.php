@@ -20,14 +20,20 @@ class DisplayController extends Controller
     }
 
 	//
-    public function menu()
+    public function cart()
     {
-        return view('menu');
+        return view('cart');
     }
 
     //
     public function services()
     {
         return view('services');
+    }
+
+    //
+    public function order()
+    {
+        return view('order');
     }
 }

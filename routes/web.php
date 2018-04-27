@@ -59,9 +59,11 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::get('contact', 'DisplayController@contact');
 
-	Route::get('menu', 'DisplayController@menu');
+	Route::get('cart', 'DisplayController@cart');
 
 	Route::get('services', 'DisplayController@services');
+
+	Route::get('order', 'DisplayController@order');
 
 	// 前台API
 	// 后期界面完成添加中间件判断是否为ajax，才给予显示

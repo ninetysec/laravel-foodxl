@@ -35,9 +35,9 @@ class CartController extends Controller
         }
 
         $rules = [
-            'goods_id'    => 'required|integer|min:1',
-            'number'      => 'required|integer|min:1',
-            'attr_id'     => 'integer|min:1',
+            'goods_id'    => 'required|integer',
+            'number'      => 'required|integer',
+            'attr_id'     => 'integer',
         ];
 
         $validated = $request->validate($rules);
@@ -51,10 +51,10 @@ class CartController extends Controller
     public function edit(Request $request)
     {
         $rules = [
-            'id'          => 'required|integer|min:1',
-            'goods_id'    => 'required|integer|min:1',
-            'number'      => 'required|integer|min:1',
-            'attr_id'     => 'integer|min:1',
+            'id'          => 'required|integer',
+            'goods_id'    => 'required|integer',
+            'number'      => 'required|integer',
+            'attr_id'     => 'integer',
             'values'      => 'json',
         ];
 
