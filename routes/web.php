@@ -77,7 +77,7 @@ Route::group(['middleware' => 'web'], function () {
 
 		Route::get('cart/add', 'CartController@add');
 
-		Route::get('cart/edit', 'CartController@edit');
+		Route::any('cart/edit', 'CartController@edit');
 
 		Route::get('cart/get', 'CartController@getList');
 

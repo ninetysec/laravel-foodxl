@@ -51,9 +51,8 @@ class CartController extends Controller
     public function edit(Request $request)
     {
         $rules = [
-            'id'          => 'required|integer',
-            'goods_id'    => 'required|integer',
-            'number'      => 'required|integer',
+            'id'          => 'required',
+            'number'      => 'required',
             'attr_id'     => 'integer',
             'values'      => 'json',
         ];

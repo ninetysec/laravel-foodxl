@@ -252,17 +252,22 @@
 				"shop_price":25
 			}
 			*/
-			console.log(data);
 			for(var i = 0;i<data.length;i++){
 				$('#menu').append(getMenu(data[i]));
 				if (i == 6) {break;}
 			}
 		});
 	});
+
+	function add(goods_id){
+		$.get(`api/cart/add?goods_id=`+goods_id+`&number=1`,function(){
+			alert('添加成功');
+		});
+	}
 	
 	function getMenu(obj){
 		var tmp = `<div class="col-lg-4 col-md-4 col-sm-6">
-				<a href="`+obj.goods_img+`" class="fh5co-card-item image-popup">
+				<a href="#" class="fh5co-card-item image-popup" onclick="add(`+obj.goods_id+`);return false;">
 					<figure>
 						<div class="overlay"><i class="ti-plus"></i></div>
 						<img src="`+obj.goods_img+`" alt="Image" class="img-responsive">

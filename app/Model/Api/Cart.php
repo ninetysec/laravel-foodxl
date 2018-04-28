@@ -65,49 +65,60 @@ class Cart extends Model
     {
         extract($attributes);
 
-        // 获取商品信息
-        if (is_null($goods = Goods::where('goods_id', $goods_id)->first())) { return false; }
-
-        // 获取购物车信息
-        $cart = self::where('id', $id)->where('skey', session('key'))->get();
-        if (empty($cart->toArray())) { return false; }
-
         // 获取地址信息
-        $values = json_decode($values,true);
-
-        if (isset($values['phone'])) {
-            // $model = Contact::where('phone',$values['phone'])->firstOrNew(['phone' => $values['phone']]);
-            if (is_null($model = Contact::where('phone', $values['phone'])->first())) {
-                Contact::insert(['phone' => $values['phone'], 'add_time' => time()]);
-                $model = Contact::where('phone', $values['phone'])->first();
+        if (isset($values))
+        {
+            $values = json_decode($values,true);
+            if (isset($values['phone'])) {
+                // $contact = Contact::where('phone',$values['phone'])->firstOrNew(['phone' => $values['phone']]);
+                if (is_null($contact = Contact::where('phone', $values['phone'])->first())) {
+                    Contact::insert(['phone' => $values['phone'], 'add_time' => time()]);
+                    $contact = Contact::where('phone', $values['phone'])->first();
+                }
+                $contact->phone = $values['phone'];
             }
-            $model->phone = $values['phone'];
+
+            if (isset($values['address'])) {
+                $contact->address = strip_tags($values['address']);
+            }
+
+            if (isset($values['name'])) {
+                $contact->name = strip_tags($values['name']);
+
+            }
+
+            if (isset($contact)) {
+                $contact->save();
+            }
         }
 
-        if (isset($values['address'])) {
-            $model->address = strip_tags($values['address']);
+        $id = isset($id) ? explode(',',trim($id,',')) : [];
+        $number = isset($number) ? explode(',',trim($number,',')) : [];
+
+        if (is_array($id) && is_array($number)) {
+
+            for ($i=0; $i < count($id); $i++) { 
+
+                // 获取购物车信息
+                if (is_null($cart = self::where('id', $id[$i])->where('skey', session('key'))->first())) { return false; }
+
+                // 获取产品信息
+                if (is_null($goods = Goods::where('goods_id', $cart->goods_id)->first())) { return false; }
+
+                $new = array(
+                    'number'     => $number[$i],
+                    'attr_id'    => isset($attr_id) ? $attr_id : 0,
+                    'attr_value' => isset($attr_id) ? GoodsAttr::where(['attr_id' => $attr_id, 'goods_id' => $goods->goods_id])->value('attr_value') : '',
+                    'price'      => isset($attr_id) ? GoodsAttr::where(['attr_id' => $attr_id, 'goods_id' => $goods->goods_id])->value('attr_price') : $goods->shop_price,
+                    'contact_id' => isset($contact->id) ? $contact->id : 0
+                );
+
+                self::where('id', $id[$i])->update($new);
+            }
+
         }
 
-        if (isset($values['name'])) {
-            $model->name = strip_tags($values['name']);
-
-        }
-
-        if (isset($model)) {
-            $model->save();
-        }
-
-        $new = array(
-            'number'     => $number,
-            'attr_id'    => isset($attr_id) ? $attr_id : 0,
-            'attr_value' => isset($attr_id) ? GoodsAttr::where(['attr_id' => $attr_id, 'goods_id' => $goods_id])->value('attr_value') : '',
-            'price'      => isset($attr_id) ? GoodsAttr::where(['attr_id' => $attr_id, 'goods_id' => $goods_id])->value('attr_price') : $goods->shop_price,
-            'contact_id' => $model->id
-        );
-
-        $model = self::where('id', $id)->update($new);
-
-        return $model;
+        return true;
     }
 
     public static function checkout(array $attributes)

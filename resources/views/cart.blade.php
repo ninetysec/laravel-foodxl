@@ -12,7 +12,7 @@
 			
 			<div class="row">
 				<div class="col-sm-4 col-xs-12">
-					<div id="gtco-logo"><a href="index">Savory <em>.</em></a></div>
+					<div id="gtco-logo"><a href="/">FoodXL</a></div>
 				</div>
 				<div class="col-xs-8 text-right menu-1">
 					<ul>
@@ -92,31 +92,32 @@
 				</table>
 			</div>
 			<div class="row" style="padding-top: 5%;">
-				<form class="form-inline">
-					<div class="col-md-3">
-						<div class="form-group">
-							<input type="text" class="form-control" id="name" placeholder="Your Name">
-						</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<input type="text" class="form-control" id="name" placeholder="Your Name">
 					</div>
-					<div class="col-md-3">
-						<div class="form-group">
-							<input type="text" class="form-control" id="phone" placeholder="Your Phone">
-						</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<input type="text" class="form-control" id="phone" placeholder="Your Phone">
 					</div>
-					<div class="col-md-3">
-						<div class="form-group">
-							<input type="text" class="form-control" id="email" placeholder="Your Email">
-						</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<input type="text" class="form-control" id="email" placeholder="Your Email">
 					</div>
-					<div class="col-md-3">
-						<div class="form-group">
-							<input type="text" class="form-control" id="address" placeholder="Your Address">
-						</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<input type="text" class="form-control" id="address" placeholder="Your Address">
 					</div>
-					<div class="col-md-3" style="float:right;padding-top:3%;">
-						<button type="submit" class="btn btn-default btn-block" id="edit">Edit</button>
-					</div>
-				</form>
+				</div>
+				<div class="col-md-3" style="float:right;padding-top:3%;">
+					<button type="submit" class="btn btn-default btn-block" id="edit">Edit</button>
+				</div>
+				<div class="col-md-3" style="float:right;padding-top:3%;">
+					<button type="submit" class="btn btn-default btn-block" id="clear">Clear</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -178,27 +179,43 @@
 					if (i == 6) {break;}
 				}
 			});
-	        /*
-			$("#edit").keyup(function(){
-				var id = 
-				var goods_id = 
-				var number = 
-				var name = 
-				var phone = 
-				// var email = 
-				var address = 
+	        
+			$("#edit").click(function(){
+				var id = '';
+				var number = '';
+				$('input[name="id[]"]').each(function(index,item) {
+					id = id + $(this).val() + ',';
+				});
+				$('input[name="number[]"]').each(function(index,item) {
+					number = number + $(this).val() + ',';
+				});
+				var name = $("#name").val();
+				var phone = $("#phone").val();
+				var address = $("#address").val();
 				var values = {"name":name,"phone":phone,"address":address};
 				var arr = {
 					"id" : id,
-					"goods_id" : goods_id,
 					"number" : number,
-					"values" : values
+					'_token' : "{{ csrf_token() }}"
 				};
+				if (name && phone && address) {
+					arr['values'] = values;
+				}
 		    	$.post("/api/cart/edit",arr,function(data){
-		    		console.log(data);
+		    		if (data == true) {
+		    			alert('编辑成功');
+		    		}
+		    		if (data == false) {
+		    			alert('编辑失败');
+		    		}
 		    	});
 			});
-			*/
+
+			$("#clear").click(function(){
+				$.get("/api/cart/clear",function(){
+					history.go(0);
+				});
+			});
 		});
 
 		function getMenu(obj) {
@@ -218,11 +235,11 @@
 					</a>
 				</div>`;
 			*/
-			var tmp = `<tr><td>`
-					+obj.id+`</td><td>`
+			var tmp = `<tr><td><input name="id[]" value='`
+					+obj.id+`' type='hidden'/>`+obj.id+`</td><td>`
 					+obj.goods_name+`</td><td>`
-					+obj.price+`</td><td>`
-					+obj.number+`</td><td>`
+					+obj.price+`</td><td><input name="number[]" value='`
+					+obj.number+`' type='text' size=3/></td><td>`
 					+obj.price+`</td><td>`
 					+`x</td></tr>`;
 			return tmp;

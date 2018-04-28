@@ -12,7 +12,7 @@
 			
 			<div class="row">
 				<div class="col-sm-4 col-xs-12">
-					<div id="gtco-logo"><a href="index">Savory <em>.</em></a></div>
+					<div id="gtco-logo"><a href="/">FoodXL</a></div>
 				</div>
 				<div class="col-xs-8 text-right menu-1">
 					<ul>
@@ -91,33 +91,6 @@
 						
 					</tbody>
 				</table>
-			</div>
-			<div class="row" style="padding-top: 5%;">
-				<form class="form-inline">
-					<div class="col-md-3">
-						<div class="form-group">
-							<input type="text" class="form-control" id="name" placeholder="Your Name">
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="form-group">
-							<input type="text" class="form-control" id="phone" placeholder="Your Phone">
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="form-group">
-							<input type="text" class="form-control" id="email" placeholder="Your Email">
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="form-group">
-							<input type="text" class="form-control" id="address" placeholder="Your Address">
-						</div>
-					</div>
-					<div class="col-md-3" style="float:right;padding-top:3%;">
-						<button type="submit" class="btn btn-default btn-block" id="edit">Edit</button>
-					</div>
-				</form>
 			</div>
 		</div>
 	</div>

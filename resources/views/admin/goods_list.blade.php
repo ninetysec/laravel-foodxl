@@ -28,10 +28,5 @@
             </table>
         </div>
     </div>
-	<script type="text/javascript">
-	$("#is_on_sale").change(function() { 
-		alert("checked");
-	});
-	</script>
 </div>
 @endsection
