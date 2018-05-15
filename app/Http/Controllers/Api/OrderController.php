@@ -18,10 +18,24 @@ class OrderController extends Controller
     }
 
     //
+    public function search(Request $request)
+    {
+        $rules = [
+            'phone'    => 'required|string'
+        ];
+
+        $validated = $request->validate($rules);
+
+        $data = Order::search($validated);
+
+        return response()->json($data);
+    }
+
+    //
     public function info(Request $request)
     {
         $rules = [
-            'phone'    => 'required|string|min:1'
+            'id'    => 'required|integer'
         ];
 
         $validated = $request->validate($rules);

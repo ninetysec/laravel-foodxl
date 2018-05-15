@@ -78,7 +78,6 @@
 				<table>
 					<thead>
 						<tr>
-							<th>#</th>
 							<th>菜品名称</th>
 							<th>单价</th>
 							<th>数量</th>
@@ -111,6 +110,9 @@
 					<div class="form-group">
 						<input type="text" class="form-control" id="address" placeholder="Your Address">
 					</div>
+				</div>
+				<div class="col-md-3" style="float:right;padding-top:3%;">
+					<button type="submit" class="btn btn-default btn-block" id="checkout">Checkout</button>
 				</div>
 				<div class="col-md-3" style="float:right;padding-top:3%;">
 					<button type="submit" class="btn btn-default btn-block" id="edit">Edit</button>
@@ -165,25 +167,25 @@
 	</body>
 	<script type="text/javascript">
 	    $(function() {
-			// 需要修改
+			// 列表
 	        $.get("/api/cart/get", function(data) {
-	        	/*
-				var obj={
-					"goods_img":"/uploads/images/2018-04/1523521513.jpg",
-					"goods_name": "测试显示",
-					"shop_price":25
-				}
-				*/
 				for(var i = 0;i<data.length;i++){
 					$('#menu').append(getMenu(data[i]));
-					if (i == 6) {break;}
 				}
 			});
 	        
+			// 地址
+	        $.get("/api/cart/address", function(data) {
+				$("#name").val(data['name']);
+				$("#phone").val(data['phone']);
+				$("#address").val(data['address']);
+				$("#email").val(data['email']);
+			});
+
 			$("#edit").click(function(){
 				var id = '';
 				var number = '';
-				$('input[name="id[]"]').each(function(index,item) {
+				$('input[name="id"]').each(function(index,item) {
 					id = id + $(this).val() + ',';
 				});
 				$('input[name="number[]"]').each(function(index,item) {
@@ -192,32 +194,62 @@
 				var name = $("#name").val();
 				var phone = $("#phone").val();
 				var address = $("#address").val();
-				var values = {"name":name,"phone":phone,"address":address};
+				var email = $("#email").val();
+				var values = {"name":name,"phone":phone,"address":address,"email":email};
 				var arr = {
 					"id" : id,
 					"number" : number,
-					'_token' : "{{ csrf_token() }}"
+					"_token" : "{{ csrf_token() }}"
 				};
 				if (name && phone && address) {
-					arr['values'] = values;
+					arr['values'] = JSON.stringify(values);
+					// arr['values'] = values;
 				}
-		    	$.post("/api/cart/edit",arr,function(data){
-		    		if (data == true) {
-		    			alert('编辑成功');
-		    		}
-		    		if (data == false) {
-		    			alert('编辑失败');
-		    		}
-		    	});
+				$.ajax({        
+				        type: "POST",
+				        url:'/api/cart/edit',
+				        data:arr,
+				        dataType:'json',
+				        success: function(res) {
+				            alert('Success');
+				        },
+				        error : function (msg) {   
+				            if (msg.status == 422) {
+				                var json=JSON.parse(msg.responseText);
+				                json = json.errors;                      
+				                for ( var item in json) {
+				                    for ( var i = 0; i < json[item].length; i++) {
+				                        alert(json[item][i]);
+				                        return ; //遇到验证错误，就退出
+				                    }
+				                }
+				            } else {
+				                alert('服务器连接失败');
+				                return ;
+				            }
+				        }
+				    });
 			});
 
+			// 清除购物车
 			$("#clear").click(function(){
 				$.get("/api/cart/clear",function(){
 					history.go(0);
 				});
 			});
-		});
 
+			// 下单
+			$("#checkout").click(function(){
+				var id = '';
+				$("input[name^='id']").each(function(i){
+					id = id + this.value + ',';
+                }); 
+				console.log(id);
+				$.get("/api/cart/checkout?id=" + id,function(){
+					location.href='/order';
+				});
+			});
+		});
 		function getMenu(obj) {
 			/*
 			var tmp = `<div class="col-lg-4 col-md-4 col-sm-6">
@@ -235,9 +267,8 @@
 					</a>
 				</div>`;
 			*/
-			var tmp = `<tr><td><input name="id[]" value='`
-					+obj.id+`' type='hidden'/>`+obj.id+`</td><td>`
-					+obj.goods_name+`</td><td>`
+			var tmp = `<tr><td><input name="id" value='`
+					+obj.id+`' type='hidden'/>`+obj.goods_name+`</td><td>`
 					+obj.price+`</td><td><input name="number[]" value='`
 					+obj.number+`' type='text' size=3/></td><td>`
 					+obj.price+`</td><td>`

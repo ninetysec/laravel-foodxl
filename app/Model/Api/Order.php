@@ -29,7 +29,7 @@ class Order extends Model
     {
         if (!isset($user_id))
         {
-            $model = self::where('skey',session('key'))->with('contact')->with('order_goods')->get();
+            $model = self::where('skey',session('key'))->with('contact')->get();
         }
 
         return $model;
@@ -40,9 +40,22 @@ class Order extends Model
     {
         extract($attributes);
 
+        if ($model = self::where('order_id',$id)->with('contact')->with('order_goods')->get())
+        {
+            $model = $model->toArray();
+        }
+
+        return $model;
+    }
+
+    // 
+    public static function search(array $attributes)
+    {
+        extract($attributes);
+
         $arr = Contact::where('phone',$phone)->pluck('id');
 
-        if ($model = self::whereIn('contact_id',$arr)->with('contact')->with('order_goods')->get())
+        if ($model = self::whereIn('contact_id',$arr)->with('contact')->get())
         {
             $model = $model->toArray();
         }

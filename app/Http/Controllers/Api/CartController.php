@@ -47,18 +47,19 @@ class CartController extends Controller
         return response()->json($data);
     }
 
-    //
+    // {id: "19,20,", number: "1,1,", _token: "h4kGLDi0gU0XQfKcTyTIMdSfaqcnBY3f8nScmATV", values: {name: "admin", phone: "13607985583", address: "测试地址"}}
     public function edit(Request $request)
     {
+        
         $rules = [
-            'id'          => 'required',
-            'number'      => 'required',
-            'attr_id'     => 'integer',
+            'id'          => 'required|string',
+            'number'      => 'required|string',
+            'attr_id'     => 'string',
             'values'      => 'json',
         ];
 
         $validated = $request->validate($rules);
-
+        
         $data = Cart::edit($validated);
 
         return response()->json($data);
@@ -68,7 +69,7 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
         $rules = [
-            'id'          => 'json'
+            'id'          => 'required|string'
         ];
 
         $validated = $request->validate($rules);
@@ -81,6 +82,13 @@ class CartController extends Controller
     public function clear()
     {
         $data = Cart::clear_cart_ids();
+
+        return response()->json($data);
+    }
+
+    public function address()
+    {
+        $data = Cart::address();
 
         return response()->json($data);
     }
