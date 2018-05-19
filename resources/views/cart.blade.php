@@ -225,7 +225,7 @@
             limit: 10,
             source: function (query, process) {
                 return $.get("http://demo.foodxl.fr:2333/?q=" + $('#address').val(), function (data) {
-                    return process(data.label);
+                    return process(data);
                 });
             }
 		});
