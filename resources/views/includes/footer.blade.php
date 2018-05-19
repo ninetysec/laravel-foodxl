@@ -41,7 +41,8 @@
 </div>
 
 <!-- jQuery -->
-<script src="js/jquery.min.js"></script>
+<script src="http://docker.qfdk.me/static/js/jquery.min.js"></script>
+
 <!-- jQuery Easing -->
 <script src="js/jquery.easing.1.3.js"></script>
 <!-- Bootstrap -->

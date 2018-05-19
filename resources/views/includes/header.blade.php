@@ -22,8 +22,6 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
-
-	<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js"></script>
 	
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
