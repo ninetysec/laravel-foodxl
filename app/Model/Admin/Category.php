@@ -80,8 +80,9 @@ class Category extends Model
         }
         elseif ($action == 'delete')
         {
-            if (self::where('cat_id',$id)->delete() || self::where('parent_id',$id)->update(['parent_id' => 0]))
+            if (self::where('cat_id',$id)->delete())
             {
+                self::where('parent_id',$id)->update(['parent_id' => 0]);
                 return true;
             }
         }
