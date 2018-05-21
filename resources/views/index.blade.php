@@ -122,12 +122,12 @@
 
 </body>
 <script type="text/javascript">
+	var goods =[];
     $(function() {
 		// 需要修改 
 		// http://test.foodxl.fr:8000/api/category/list
-		
-		$.ajaxSetup({async : false});
 
+		$.ajaxSetup({async : false});
 		$.get("/api/category/list", function(cat) {
 			for(var i = 0;i<cat.length;i++){
 				$('#menu').append(getCat(cat[i]));
@@ -135,6 +135,7 @@
 					// $('#menu').append(getCat(cat[i]));
 					for(var x = 0;x<data.length;x++) {
 						$('#menu').append(getGoods(data[x]));
+						goods.push(data[x]);
 						if (x == 6) {break;}
 					}
 				});
@@ -142,8 +143,11 @@
 		});
 	});
 
-	function modal(obj){
-		$('#myContent').html(`<div class="col-lg-4 col-md-4 col-sm-6">
+	function modal(id){
+		var obj=findGood(id);
+		if(obj){
+			$('#myModal').modal();
+			$('#myContent').html(`<div class="col-lg-4 col-md-4 col-sm-6">
 					<figure>
 						<div class="overlay"><i class="ti-plus"></i></div>
 						<img src="`+obj.goods_img+`" alt="Image" class="img-responsive">
@@ -159,11 +163,20 @@
 					alert('添加成功');
 				});
 			});
+		}
 	}
+
+	function findGood(id){
+		for(var i =0;i<goods.length;i++){
+			if(goods[i].goods_id==id){
+				return goods[i];
+			}
+		}
+	} 
 
 	function getGoods(obj){
 		var tmp = `<div class="col-lg-4 col-md-4 col-sm-6">
-				<a type="button" class="fh5co-card-item image-popup" data-toggle="modal" data-target="#myModal" onclick="modal(`+obj+`);">
+				<a type="button" class="fh5co-card-item image-popup" onclick="modal(`+obj.goods_id+`);">
 					<figure>
 						<div class="overlay"><i class="ti-plus"></i></div>
 						<img src="`+obj.goods_img+`" alt="Image" class="img-responsive">
