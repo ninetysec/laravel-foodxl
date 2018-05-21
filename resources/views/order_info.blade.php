@@ -64,7 +64,7 @@
 		<div class="gtco-container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
-					<h2 class="cursive-font primary-color">订单列表</h2>
+					<h2 class="cursive-font primary-color">订单支付</h2>
 				</div>
 			</div>
 			<style type="text/css">
@@ -78,27 +78,23 @@
 				<table>
 					<thead>
 						<tr>
-							<th>订单号</th>
-							<th>状态</th>
-							<th>名称</th>
-							<th>总价</th>
-							<th>时间</th>
-							<th>操作</th>
+							<th>菜品名称</th>
+							<th>单价</th>
+							<th>数量</th>
+							<th>小计</th>
 						</tr>
 					</thead>
-					<tbody id="menu">
+					<tbody id="goods">
 						
 					</tbody>
 				</table>
 			</div>
-			<div class="row" style="padding-top: 5%;">
-				<div class="col-md-3">
-					<div class="form-group">
-						<input type="text" class="form-control" id="phone" placeholder="Your Phone">
-					</div>
-				</div>
+			<div id='info'>
+				
+			</div>
+			<div class="row" style="padding-top: 5%;float:right;">
 				<div class="col-md-2">
-					<button type="submit" class="btn btn-default btn-block" id="search">Search</button>
+					<button type="submit" class="btn btn-default">支付订单</button>
 				</div>
 			</div>
 		</div>
@@ -146,35 +142,48 @@
 
 	</body>
 	<script type="text/javascript">
-	    $(function() {
-			// 订单列表
-	        $.get("/api/order/list", function(data) {
-				for(var i = 0;i<data.length;i++){
-					$('#menu').append(getMenu(data[i]));
-				}
-			});
+		// 获取URL参数
+		function getQueryVariable(variable)
+		{
+		       var query = window.location.search.substring(1);
+		       var vars = query.split("&");
+		       for (var i=0;i<vars.length;i++) {
+		               var pair = vars[i].split("=");
+		               if(pair[0] == variable){return pair[1];}
+		       }
+		       return(false);
+		}
 
-			// 搜索订单
-			$("#search").click(function(){
-				var phone = $("#phone").val();
-		        $.get("/api/order/search?phone=" + phone, function(data) {
-		        	$("#menu").empty();
-					for(var i = 0;i<data.length;i++){
-						$('#menu').append(getMenu(data[i]));
-					}
-				});
+	    $(function() {
+			// 产品列表
+			var id = getQueryVariable('id');
+	        $.get("/api/order/info?id="+id, function(data) {
+				for(var i = 0;i<data['order_goods'].length;i++){
+					$('#goods').append(getGoods(data['order_goods'][i]));
+				}
+				$('#info').append(getInfo(data));
 			});
 		});
 
-		function getMenu(obj) {
+		function getGoods(obj) {
 			var tmp = `<tr><td>`
-					+obj.order_sn+`</td><td>`
-					+obj.order_status+`</td><td>`
-					+obj.contact.name+`</td><td>`
-					+obj.order_amount+`</td><td>`
-					+obj.add_time+`</td><td>`
-					+`<a href="order_info?id=`+obj.order_id+`">查看</a></td></tr>`;
+					+obj.goods_name+`</td><td>`
+					+obj.goods_price+` €</td><td>`
+					+obj.goods_number+`</td><td>`
+					+(obj.goods_price*obj.goods_number).toFixed(2)+` €</td></tr>`;
+			return tmp;
+		}
+
+		function getInfo(obj) {
+			var tmp = `<br><ul><li>Name：`
+					+obj.contact.name+`</li><li>Phone：`
+					+obj.contact.phone+`</li><li>Email：`
+					+obj.contact.email+`</li><li>Address：`
+					+obj.contact.address+`</li><li>Time：`
+					+obj.time+`</li><li>Total：<span style="color:red;">`
+					+obj.order_amount+` €</span></li></ul>`;
 			return tmp;
 		}
 	</script>
 </html>
+

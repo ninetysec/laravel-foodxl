@@ -54,7 +54,7 @@ class CategoryController extends Controller
                     'action'     => 'required|string',
                     'id'         => 'integer',
                     'name'       => 'string',
-                    'desc'       => 'string',
+                    'desc'       => '',
                     'parent_id'  => 'integer',
                     'sort_order' => 'integer',
                 ];

@@ -12,18 +12,19 @@ class Order extends Model
 
     public    $timestamps = false;
 
-    // protected $appends = ['cat_name'];
+    protected $appends = ['pay_status_char','order_status_char','time'];
     // protected $visible = ['id', 'change', 'reason', 'created_at', 'money', 'user_id', 'user_name', 'level', 'customer', 'customer_id', 'customer_level'];
 
     // 订单状态
-    const OS_UNCONFIRMED     = 0; // 未确认
-    const OS_CONFIRMED       = 1; // 已确认
-    const OS_CANCELED        = 2; // 已取消
-    const OS_RETURNED        = 4; // 退货
+    const OS_UNCONFIRMED     = 0; // 未发货
+    const OS_CONFIRMED       = 1; // 已发货
+    const OS_FINISH          = 2; // 已完成
+    const OS_CANCELED        = 3; // 已取消
+    const OS_RETURNED        = 4; // 退款
 
     // 支付状态
     const PS_UNPAYED         = 0; // 未付款
-    const PS_PAYED           = 2; // 已付款
+    const PS_PAYED           = 1; // 已付款
 
     public static function getList()
     {
@@ -40,10 +41,7 @@ class Order extends Model
     {
         extract($attributes);
 
-        if ($model = self::where('order_id',$id)->with('contact')->with('order_goods')->get())
-        {
-            $model = $model->toArray();
-        }
+        $model = self::where('order_id',$id)->with('contact')->with('order_goods')->first();
 
         return $model;
     }
@@ -79,5 +77,60 @@ class Order extends Model
     public function contact()
     {
         return $this->hasOne('App\Model\Api\Contact', 'id', 'contact_id');
+    }
+
+    public function getPayStatusCharAttribute()
+    {
+        switch ($this->pay_status) {
+            case self::PS_UNPAYED:
+                $char = '未支付';
+                break;
+            
+            case self::PS_PAYED:
+                $char = '已支付';
+                break;
+
+            default:
+                $char = '未知';
+                break;
+        }
+
+        return $char;
+    }
+
+    public function getOrderStatusCharAttribute()
+    {
+        switch ($this->order_status) {
+            case self::OS_UNCONFIRMED:
+                $char = '未发货';
+                break;
+
+            case self::OS_CONFIRMED:
+                $char = '已发货';
+                break;
+
+            case self::OS_FINISH:
+                $char = '已完成';
+                break;
+
+            case self::OS_CANCELED:
+                $char = '已取消';
+                break;
+
+            case self::OS_RETURNED:
+                $char = '退款';
+                break;
+
+            default:
+                $char = '未知';
+                break;
+        }
+
+        return $char;
+    }
+
+    public function getTimeAttribute()
+    {
+        return date("Y/m/d H:i:s",$this->add_time);
     }
 }

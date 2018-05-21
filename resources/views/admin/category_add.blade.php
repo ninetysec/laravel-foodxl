@@ -28,7 +28,7 @@
 		        		<div class="form-group">
 		        			<label class="col-md-4 control-label">备注：</label>
 			        		<div class="col-md-4">
-			        			<input name="desc" value="" type="text" class="form-control" />
+			        			<input name="desc" value=" " type="text" class="form-control" />
 			        		</div>
 			        	</div>
 			        	<!--

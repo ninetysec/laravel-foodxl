@@ -65,6 +65,8 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::get('order', 'DisplayController@order');
 
+	Route::get('order_info', 'DisplayController@order_info');
+
 	// 前台API
 	// 后期界面完成添加中间件判断是否为ajax，才给予显示
 	Route::group(['prefix' => 'api','namespace' => 'Api'], function ($router)

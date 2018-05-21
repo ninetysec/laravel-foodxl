@@ -67,7 +67,6 @@
 			</div>
 			<style type="text/css">
 			table {border-collapse:collapse;width: 100%}
-
 			table,th,td {border: 1px solid black;}
 			th,td {padding:15px;}
 			</style>
@@ -215,9 +214,10 @@
 					        data:arr,
 					        dataType:'json',
 					        success: function(res) {
-								$.get("/api/cart/checkout?id=" + id,function(){
+								$.get("/api/cart/checkout?id=" + id,function(data){
 									alert('下单成功');
-
+									console.log(data);
+									location.href = "order_info?id=" + data;
 								});
 					        },
 					        error: function(msg) {   

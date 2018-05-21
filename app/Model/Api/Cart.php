@@ -136,7 +136,7 @@ class Cart extends Model
         }
         // 清空购物车
         self::clear_cart_ids($id);
-        return true;
+        return $order_id;
     }
     public static function clear_cart_ids($arr = null)
     {

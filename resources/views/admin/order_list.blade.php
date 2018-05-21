@@ -18,7 +18,17 @@
 	            <tr>
 	            	<td>{{ $order['order_id'] }}</td>
 	            	<td>{{ $order['order_sn'] }}</td>
-	            	<td>{{ $order['pay_status_char'] }}、{{ $order['order_status_char'] }}</td>
+	            	<td>
+	            		<span class="label {{ ($order['pay_status'] == 0) ? 'label-warning' : 'label-success' }}">{{ $order['pay_status_char'] }}</span>
+	            		<span class="label @if ($order['order_status'] == 2)
+	            								label-info
+	            						   @elseif ($order['order_status'] == 3)
+	            								label-Danger
+										   @else 
+										   		label-default
+										   @endif
+	            		">{{ $order['order_status_char'] }}</span>
+	            	</td>
 	            	<td>{{ $order['contact']['name'] }}</td>
 	            	<td>{{ $order['order_amount'] }}</td>
 	            	<td>{{ date('Y-m-d H:m:s',$order['add_time']) }}</td>

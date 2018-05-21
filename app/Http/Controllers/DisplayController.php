@@ -36,4 +36,10 @@ class DisplayController extends Controller
     {
         return view('order');
     }
+
+    //
+    public function order_info()
+    {
+        return view('order_info');
+    }
 }
