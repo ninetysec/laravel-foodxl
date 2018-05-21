@@ -163,7 +163,7 @@
 
 	function getGoods(obj){
 		var tmp = `<div class="col-lg-4 col-md-4 col-sm-6">
-				<a href="#" class="fh5co-card-item image-popup" data-toggle="modal" data-target="#myModal" onclick="modal(`+obj+`);return false;">
+				<a type="button" class="fh5co-card-item image-popup" data-toggle="modal" data-target="#myModal" onclick="modal(`+obj+`);">
 					<figure>
 						<div class="overlay"><i class="ti-plus"></i></div>
 						<img src="`+obj.goods_img+`" alt="Image" class="img-responsive">
