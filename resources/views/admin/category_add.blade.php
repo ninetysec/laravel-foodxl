@@ -31,17 +31,19 @@
 			        			<input name="desc" value="" type="text" class="form-control" />
 			        		</div>
 			        	</div>
+			        	<!--
 		        		<div class="form-group">
 		        			<label class="col-md-4 control-label">上级：</label>
 			        		<div class="col-md-4">
 			        			<select name='parent_id'>
-			        				<option value="0">顶级分类</option>
+			        				<option value="0">请选择</option>
 			        				@foreach ($cat as $c)
 			        				<option value="{{ $c['cat_id'] }}">{{ $c['cat_name'] }}</option>
 			        				@endforeach
 			        			</select>
 			        		</div>
 			        	</div>
+			        	-->
 		        		<div class="form-group">
 		        			<label class="col-md-4 control-label">排序：</label>
 			        		<div class="col-md-4">
