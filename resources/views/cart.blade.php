@@ -58,8 +58,6 @@
 		-->
 	</header>
 
-	
-	
 	<div class="gtco-section">
 		<div class="gtco-container">
 			<div class="row">
@@ -219,7 +217,7 @@
 					        success: function(res) {
 								$.get("/api/cart/checkout?id=" + id,function(){
 									alert('下单成功');
-									location.href='/order';
+
 								});
 					        },
 					        error: function(msg) {   

@@ -73,7 +73,7 @@ class Order extends Model
 
     public function order_goods()
     {
-        return $this->hasOne('App\Model\Api\OrderGoods', 'order_id', 'order_id');
+        return $this->hasMany('App\Model\Api\OrderGoods', 'order_id', 'order_id');
     }
 
     public function contact()
