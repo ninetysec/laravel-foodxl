@@ -29,7 +29,7 @@ class Category extends Model
                 ->with('son')
                 ->orderBy('sort_order', 'ASC')
                 ->orderBy('cat_id', 'DESC');
-                
+
         $total = $model->count();
 
         $data = $model->paginate($per_page)->toArray();
@@ -76,6 +76,13 @@ class Category extends Model
                 $model->sort_order = isset($sort_order) ? $sort_order : 0;
                 if (isset($parent_id) && !is_null(self::where('cat_id',$parent_id)->first()  && $parent_id !== $id)) $model->parent_id = $parent_id;
                 if ($model->save()) return true;
+            }
+        }
+        elseif ($action == 'delete')
+        {
+            if (self::where('cat_id',$id)->delete() || self::where('parent_id',$id)->update(['parent_id' => 0]))
+            {
+                return true;
             }
         }
 

@@ -192,16 +192,25 @@
 			// 下单
 			$("#checkout").click(function(){
 				var id = '';
-				var pay_status = $("#pay_status").val();
-				var order_status = $("#order_status").val();
-				var status = {"pay_status":pay_status,"order_status":order_status};
+				var number = '';
+				$('input[name="id"]').each(function(index,item) {
+					id = id + $(this).val() + ',';
+				});
+				$('input[name="number"]').each(function(index,item) {
+					number = number + $(this).val() + ',';
+				});
+				var name = $("#name").val();
+				var phone = $("#phone").val();
+				var address = $("#address").val();
+				var email = $("#email").val();
+				var values = {"name":name,"phone":phone,"address":address,"email":email};
 				var arr = {
 					"id" : id,
 					"number" : number,
 					"_token" : "{{ csrf_token() }}"
 				};
 				if (name && phone && address && email) {
-					arr['status'] = JSON.stringify(status);
+					arr['values'] = JSON.stringify(values);
 					$.ajax({
 					        type: "POST",
 					        url:'/api/cart/edit',
@@ -254,7 +263,7 @@
 			*/
 			var tmp = `<tr><td><input name="id" value='`
 					+obj.id+`' type='hidden'/>`+obj.goods_name+`</td><td>`
-					+obj.price+` €</td><td><input name="number[]" value='`
+					+obj.price+` €</td><td><input name="number" value='`
 					+obj.number+`' type='text' size=3/></td><td>`
 					+(obj.price*obj.number).toFixed(2)+` €</td><td>`
 					+`<a href="/api/cart/act?action=delete&id=`+obj.id+`" >删除</a></td></tr>`;
