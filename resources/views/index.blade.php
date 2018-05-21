@@ -4,9 +4,6 @@
 <div class="gtco-loader"></div>
 
 <div id="page">
-
-
-<!-- <div class="page-inner"> -->
 <nav class="gtco-nav" role="navigation">
 	<div class="gtco-container">
 		<div class="row">
@@ -15,18 +12,17 @@
 			</div>
 			<div class="col-xs-8 text-right menu-1">
 				<ul>
-					<li><a href="cart">Cart</a></li>
-					<li><a href="order">Order</a></li>
 					<li class="has-dropdown">
-						<a href="services">Services</a>
+						<a href="services">分类列表</a>
 						<ul class="dropdown">
-							<li><a href="#">Food Catering</a></li>
+							<li><a href="#">菜单1</a></li>
 							<li><a href="#">Wedding Celebration</a></li>
 							<li><a href="#">Birthday's Celebration</a></li>
 						</ul>
 					</li>
-					<li><a href="contact">Contact</a></li>
-					<li class="btn-cta"><a href="#"><span>Reservation</span></a></li>
+					<li><a href="cart">购物车 <span class="label label-info">1</span></a></li>
+					<li><a href="contact">联系我们</a></li>
+					<li class="btn-cta"><a href="#"><span>预定位置</span></a></li>
 				</ul>	
 			</div>
 		</div>
@@ -40,54 +36,8 @@
 			<div class="col-md-12 col-md-offset-0 text-left">
 				<div class="row row-mt-15em">
 					<div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
-						<span class="intro-text-small">Hand-crafted by <a href="http://gettemplates.co" target="_blank">GetTemplates.co</a></span>
-						<h1 class="cursive-font">All in good taste!</h1>	
+						<h1 class="cursive-font">相约在8月！</h1>	
 					</div>
-					<!--
-					<div class="col-md-4 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
-						<div class="form-wrap">
-							<div class="tab">
-								<div class="tab-content">
-									<div class="tab-content-inner active" data-content="signup">
-										<h3 class="cursive-font">Table Reservation</h3>
-										<form action="#">
-											<div class="row form-group">
-												<div class="col-md-12">
-													<label for="activities">Persons</label>
-													<select name="#" id="activities" class="form-control">
-														<option value="">Persons</option>
-														<option value="">1</option>
-														<option value="">2</option>
-														<option value="">3</option>
-														<option value="">4</option>
-														<option value="">5+</option>
-													</select>
-												</div>
-											</div>
-											<div class="row form-group">
-												<div class="col-md-12">
-													<label for="date-start">Date</label>
-													<input type="text" id="date" class="form-control">
-												</div>
-											</div>
-											<div class="row form-group">
-												<div class="col-md-12">
-													<label for="date-start">Time</label>
-													<input type="text" id="time" class="form-control">
-												</div>
-											</div>
-											<div class="row form-group">
-												<div class="col-md-12">
-													<input type="submit" class="btn btn-primary btn-block" value="Reserve Now">
-												</div>
-											</div>
-										</form>	
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					-->
 				</div>
 			</div>
 		</div>
@@ -110,8 +60,8 @@
       </div>
       <div class="modal-body" id="myContent"></div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button id="commande" type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button id="commande" type="button" class="btn btn-primary">添加购物车</button>
       </div>
     </div>
   </div>
@@ -142,6 +92,7 @@
 		});
 	});
 
+	// modal 窗口
 	function modal(id){
 		var obj=findGood(id);
 		if(obj){
@@ -166,6 +117,7 @@
 		}
 	}
 
+	// 查找 货物信息 因为缺少货物详情api
 	function findGood(id){
 		for(var i =0;i<goods.length;i++){
 			if(goods[i].goods_id==id){
