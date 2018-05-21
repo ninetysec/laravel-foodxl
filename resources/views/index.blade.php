@@ -95,29 +95,31 @@
 </header>
 
 <div class="gtco-section">
-	<div class="gtco-container">
+	<div class="gtco-container" id="menu">
+		<!--
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
 				<h2 class="cursive-font primary-color">Popular Dishes</h2>
 				<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
 			</div>
 		</div>
-		<div class="row" id="menu">
-			<!--
-			<div class="col-lg-4 col-md-4 col-sm-6">
-				<a href="images/img_1.jpg" class="fh5co-card-item image-popup">
-					<figure>
-						<div class="overlay"><i class="ti-plus"></i></div>
-						<img src="images/img_1.jpg" alt="Image" class="img-responsive">
-					</figure>
-					<div class="fh5co-text">
-						<h2>Fresh Mushrooms</h2>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-						<p><span class="price cursive-font">$19.15</span></p>
-					</div>
-				</a>
-			</div>
-			-->
+		<div class="row">
+		-->
+		<!--
+		<div class="col-lg-4 col-md-4 col-sm-6">
+			<a href="images/img_1.jpg" class="fh5co-card-item image-popup">
+				<figure>
+					<div class="overlay"><i class="ti-plus"></i></div>
+					<img src="images/img_1.jpg" alt="Image" class="img-responsive">
+				</figure>
+				<div class="fh5co-text">
+					<h2>Fresh Mushrooms</h2>
+					<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
+					<p><span class="price cursive-font">$19.15</span></p>
+				</div>
+			</a>
+		</div>
+		-->
 		</div>
 	</div>
 </div>
@@ -242,18 +244,21 @@
 </body>
 <script type="text/javascript">
     $(function() {
-		// 需要修改
-        $.get("/api/category/info?id=1", function(data) {
-        	/*
-			var obj={
-				"goods_img":"/uploads/images/2018-04/1523521513.jpg",
-				"goods_name": "测试显示",
-				"shop_price":25
-			}
-			*/
-			for(var i = 0;i<data.length;i++){
-				$('#menu').append(getMenu(data[i]));
-				if (i == 6) {break;}
+		// 需要修改 
+		// http://test.foodxl.fr:8000/api/category/list
+		
+		$.ajaxSetup({async : false});
+
+		$.get("/api/category/list", function(cat) {
+			for(var i = 0;i<cat.length;i++){
+				$('#menu').append(getCat(cat[i]));
+				$.get("/api/category/info?id=" + cat[i]['cat_id'], function(data) {
+					// $('#menu').append(getCat(cat[i]));
+					for(var x = 0;x<data.length;x++) {
+						$('#menu').append(getGoods(data[x]));
+						if (x == 6) {break;}
+					}
+				});
 			}
 		});
 	});
@@ -264,7 +269,7 @@
 		});
 	}
 	
-	function getMenu(obj){
+	function getGoods(obj){
 		var tmp = `<div class="col-lg-4 col-md-4 col-sm-6">
 				<a href="#" class="fh5co-card-item image-popup" onclick="add(`+obj.goods_id+`);return false;">
 					<figure>
@@ -277,6 +282,16 @@
 						<p><span class="price cursive-font">€`+obj.shop_price+`</span></p>
 					</div>
 				</a>
+			</div>`;
+		return tmp;
+	}
+
+	function getCat(obj){
+		var tmp = `<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+					<h2 class="cursive-font primary-color">`+obj.cat_name+`</h2>
+					<p>`+obj.cat_desc+`</p>
+				</div>
 			</div>`;
 		return tmp;
 	}
