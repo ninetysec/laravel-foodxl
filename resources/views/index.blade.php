@@ -96,35 +96,11 @@
 
 <div class="gtco-section">
 	<div class="gtco-container" id="menu">
-		<!--
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
-				<h2 class="cursive-font primary-color">Popular Dishes</h2>
-				<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-			</div>
-		</div>
-		<div class="row">
-		-->
-		<!--
-		<div class="col-lg-4 col-md-4 col-sm-6">
-			<a href="images/img_1.jpg" class="fh5co-card-item image-popup">
-				<figure>
-					<div class="overlay"><i class="ti-plus"></i></div>
-					<img src="images/img_1.jpg" alt="Image" class="img-responsive">
-				</figure>
-				<div class="fh5co-text">
-					<h2>Fresh Mushrooms</h2>
-					<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
-					<p><span class="price cursive-font">$19.15</span></p>
-				</div>
-			</a>
-		</div>
-		-->
-		</div>
+	</div>
 	</div>
 </div>
 
-<div id="gtco-features">
+<!-- <div id="gtco-features">
 	<div class="gtco-container">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2 text-center gtco-heading animate-box">
@@ -174,9 +150,9 @@
 			</div>	
 		</div>
 	</div>
-</div>
+</div> -->
 
-<div id="gtco-counter" class="gtco-section">
+<!-- <div id="gtco-counter" class="gtco-section">
 	<div class="gtco-container">
 		<div class="row">0
 			<div class="col-md-8 col-md-offset-2 text-center gtco-heading animate-box">
@@ -237,7 +213,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 
 @include('includes.footer')
 
@@ -278,7 +254,7 @@
 					</figure>
 					<div class="fh5co-text">
 						<h2>`+obj.goods_name+`</h2>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia..</p>
+						<p>`+obj.goods_desc+`</p>
 						<p><span class="price cursive-font">€`+obj.shop_price+`</span></p>
 					</div>
 				</a>
