@@ -108,8 +108,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">菜品详情</h4>
       </div>
-      <div class="modal-body" id="myContent">
-      </div>
+      <div class="modal-body" id="myContent"></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button id="commande" type="button" class="btn btn-primary">Save changes</button>
@@ -147,9 +146,9 @@
 		var obj=findGood(id);
 		if(obj){
 			$('#myModal').modal();
-			$('#myContent').html(`<div class="col-lg-4 col-md-4 col-sm-6">
+			$('#myContent').html(`
+				<div  class="fh5co-card-item" >
 					<figure>
-						<div class="overlay"><i class="ti-plus"></i></div>
 						<img src="`+obj.goods_img+`" alt="Image" class="img-responsive">
 					</figure>
 					<div class="fh5co-text">
@@ -157,7 +156,8 @@
 						<p>`+obj.goods_desc+`</p>
 						<p><span class="price cursive-font">€`+obj.shop_price+`</span></p>
 					</div>
-			</div>`);
+				</div>
+			`);
 			$('#commande').on('click',function(){
 				$.get(`api/cart/add?goods_id=`+obj.goods_id+`&number=1`,function(){
 					alert('添加成功');
