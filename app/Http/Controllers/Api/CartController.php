@@ -92,4 +92,18 @@ class CartController extends Controller
 
         return response()->json($data);
     }
+
+    public function act(Request $request)
+    {
+        $rules = [
+            'action'      => 'required|string',
+            'id'          => 'required|integer'
+        ];
+
+        $validated = $request->validate($rules);
+
+        $data = Cart::act($validated);
+
+        return redirect('cart');
+    }
 }

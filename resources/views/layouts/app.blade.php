@@ -72,6 +72,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+
     <script type="text/javascript">
     $("#is_on_sale").change(function() { 
         if ($('#is_on_sale').attr('checked')) {
@@ -79,6 +80,37 @@
         } else {
             alert('未选中');
         }
+    });
+
+    $("#order_save").click(function() {
+        var id = $("#order_id").val();
+        var pay_status = $("#pay_status").val();
+        var order_status = $("#order_status").val();
+        var status = {"pay_status":pay_status,"order_status":order_status};
+        var arr = {"action":"status","id":id,"status":JSON.stringify(status),"_token":"{{ csrf_token() }}"};
+        console.log(arr);
+        $.ajax({
+            type: 'POST',
+            url: 'act',
+            data: arr,
+            dataType: 'json',
+            success: function(res) {
+                alert('保存成功');
+                location.href = 'list';
+            },
+            error: function(msg) {
+                if (msg.status == 422) {
+                    var json = JSON.parse(msg.responseText);
+                    json = json.errors;                      
+                    for (var item in json) {
+                        for (var i = 0; i < json[item].length; i++) {
+                            alert(json[item][i]);
+                            return; //遇到验证错误，就退出
+                        }
+                    }
+                }
+            }
+        });
     });
     </script>
 </body>

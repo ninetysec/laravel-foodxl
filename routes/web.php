@@ -81,17 +81,19 @@ Route::group(['middleware' => 'web'], function () {
 
 		Route::get('cart/get', 'CartController@getList');
 
-		Route::get('cart/checkout', 'CartController@checkout');
-
 		Route::get('cart/address', 'CartController@address');
+
+		Route::get('cart/act', 'CartController@act');
+
+		Route::get('cart/checkout', 'CartController@checkout');
 
 		Route::get('cart/clear', 'CartController@clear');
 
 		Route::get('order/list', 'OrderController@getList');
 
-		Route::get('order/search', 'OrderController@search');
-
 		Route::get('order/info', 'OrderController@info');
+
+		Route::get('order/search', 'OrderController@search');
 	});
 
 	// 后台登录
@@ -109,7 +111,7 @@ Route::group(['middleware' => 'web'], function () {
 
 		    Route::get('order/info', 'OrderController@info');
 
-		    Route::post('order/act', 'OrderController@act');
+		    Route::any('order/act', 'OrderController@act');
 
 		    Route::get('category/list', 'CategoryController@getList');
 
@@ -117,7 +119,7 @@ Route::group(['middleware' => 'web'], function () {
 
 		    Route::get('category/add', 'CategoryController@add');
 
-		    Route::post('category/act', 'CategoryController@act');
+		    Route::any('category/act', 'CategoryController@act');
 
 		    Route::get('goods/list', 'GoodsController@getList');
 
@@ -127,7 +129,7 @@ Route::group(['middleware' => 'web'], function () {
 
 		    Route::get('goods/status', 'GoodsController@status');
 
-		    Route::post('goods/act', 'GoodsController@act');
+		    Route::any('goods/act', 'GoodsController@act');
 		});
 	});
 });

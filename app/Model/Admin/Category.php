@@ -21,15 +21,20 @@ class Category extends Model
     {
         extract($attributes);
 
-        $per_page = isset($per_page) ? $per_page : 20;
+        $page = isset($page) ? $page : 1;
+
+        $per_page = isset($per_page) ? $per_page : 10;
 
     	$model = self::where('parent_id',0)
                 ->with('son')
                 ->orderBy('sort_order', 'ASC')
-                ->orderBy('cat_id', 'DESC')
-                ->paginate($per_page)
-                ->toArray();
-    	return $model;
+                ->orderBy('cat_id', 'DESC');
+                
+        $total = $model->count();
+
+        $data = $model->paginate($per_page)->toArray();
+
+        return ['data' => $data['data'], 'paged' => ['page' => $page, 'per_page' => $per_page, 'total' => $total]];
     }
 
     public static function info(array $attributes)
@@ -69,7 +74,7 @@ class Category extends Model
                 $model->cat_name = $name;
                 $model->cat_desc = isset($desc) ? $desc : ' ';
                 $model->sort_order = isset($sort_order) ? $sort_order : 0;
-                if (isset($parent_id) && !is_null(self::where('cat_id',$parent_id)->first())) $model->parent_id = $parent_id;
+                if (isset($parent_id) && !is_null(self::where('cat_id',$parent_id)->first()  && $parent_id !== $id)) $model->parent_id = $parent_id;
                 if ($model->save()) return true;
             }
         }

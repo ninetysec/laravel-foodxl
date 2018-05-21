@@ -44,7 +44,7 @@
 		        		<div class="form-group">
 		        			<label class="col-md-4 control-label">排序：</label>
 			        		<div class="col-md-4">
-			        			<input name="sort_order" value="" type="text" class="form-control" />
+			        			<input name="sort_order" value="0" type="text" class="form-control" />
 			        		</div>
 			        	</div>
 		        		<div class="form-group">

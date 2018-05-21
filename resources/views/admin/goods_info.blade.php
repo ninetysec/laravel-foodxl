@@ -37,7 +37,7 @@
                             <div class="col-md-4">
                                 <select name='cat_id'>
                                     @foreach ($cat as $c)
-                                    <option value="{{ $c['cat_id'] }}">{{ $c['cat_name'] }}</option>
+                                    <option value="{{ $c['cat_id'] }}"  {{ ($data['cat_id'] == $c['cat_id']) ? 'selected' : '' }}>{{ $c['cat_name'] }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -167,14 +167,16 @@
 		});
 
 		function getMenu(obj) {
-			var tmp = `<tr><td>`
-					+obj.order_sn+`</td><td>`
-					+obj.order_status+`</td><td>`
-					+obj.contact.name+`</td><td>`
-					+obj.order_amount+`</td><td>`
-					+obj.add_time+`</td><td>`
-					+`x</td></tr>`;
-			return tmp;
+			if (obj.contact != null) {
+				var tmp = `<tr><td>`
+						+obj.order_sn+`</td><td>`
+						+obj.order_status+`</td><td>`
+						+obj.contact.name+`</td><td>`
+						+obj.order_amount+`</td><td>`
+						+obj.add_time+`</td><td>`
+						+`<a href="/api/order/info?id=`+obj.order_id+`" target="_blank">查看</a></td></tr>`;
+				return tmp;
+			}
 		}
 	</script>
 </html>

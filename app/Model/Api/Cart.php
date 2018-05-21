@@ -158,4 +158,17 @@ class Cart extends Model
         }
         return $model;
     }
+    public static function act(array $attributes)
+    {
+        extract($attributes);
+        
+        if ($action == 'delete')
+        {
+            if (!is_null($model = self::where('id',$id)->first()))
+            {
+                $model = self::where('id',$id)->delete();
+            }
+        }
+        return true;
+    }
 }

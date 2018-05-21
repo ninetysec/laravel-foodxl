@@ -24,14 +24,18 @@ class Goods extends Model
     {
         extract($attributes);
 
-        $per_page = isset($per_page) ? $per_page : 20;
+        $page = isset($page) ? $page : 1;
+
+        $per_page = isset($per_page) ? $per_page : 10;
         
         $model = self::orderBy('sort_order', 'ASC')
-                ->orderBy('add_time', 'DESC')
-                ->paginate($per_page)
-                ->toArray();
+                ->orderBy('add_time', 'DESC');
 
-        return $model;
+        $total = $model->count();
+
+        $data = $model->paginate($per_page)->toArray();
+
+        return ['data' => $data['data'], 'paged' => ['page' => $page, 'per_page' => $per_page, 'total' => $total]];
     }
 
     public static function info(array $attributes)
@@ -92,7 +96,7 @@ class Goods extends Model
                 'add_time'     => time(),
             ];
 
-            if (isset($cat_id) && !is_null(self::where('cat_id',$cat_id)->first())) $data['cat_id'] = $cat_id;
+            if (isset($cat_id) && !is_null(Category::where('cat_id',$cat_id)->first())) $data['cat_id'] = $cat_id;
 
             if (self::insertGetId($data)) return true;
         }
@@ -124,6 +128,13 @@ class Goods extends Model
                 $model->cat_id      = isset($cat_id) ? $cat_id : $model->cat_id;
 
                 if ($model->save()); return true;
+            }
+        }
+        elseif ($action == 'delete')
+        {
+            if (self::where('goods_id',$id)->delete())
+            {
+                return true;
             }
         }
 

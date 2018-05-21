@@ -161,7 +161,6 @@
 		</div>
 	</div>
 </div>
-<div class="copyrights">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
 
 <div class="gtco-cover gtco-cover-sm" style="background-image: url(images/img_bg_1.jpg)"  data-stellar-background-ratio="0.5">
 	<div class="overlay"></div>

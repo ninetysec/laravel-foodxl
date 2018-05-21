@@ -16,7 +16,7 @@
 
             <div class="panel panel-default">
                 <div class="bs-example">
-                    <form action="act" method="post" class="form-horizontal">
+                    <form action="act" method="post" class="form-horizontal" enctype="multipart/form-data">
                         @csrf
                         <input name="action" value="insert" type="hidden" />
                         <div class="form-group">
@@ -56,7 +56,13 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">排序：</label>
                             <div class="col-md-4">
-                                <input name="sort_order" value="" type="text" class="form-control" />
+                                <input name="sort_order" value="0" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">图片：</label>
+                            <div class="col-md-4">
+                                <input name="image" value="" type="file" class="form-control" accept="image/*" />
                             </div>
                         </div>
                         <div class="form-group">

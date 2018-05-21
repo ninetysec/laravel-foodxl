@@ -55,7 +55,7 @@ class GoodsController extends Controller
                     'action'     => 'required|string',
                     'id'         => 'integer',
                     'cat_id'     => 'integer',
-                    'name'       => 'required|string',
+                    'name'       => 'string',
                     'desc'       => 'string',
                     'price'      => 'string',
                     'is_on_sale' => 'integer',
@@ -67,7 +67,12 @@ class GoodsController extends Controller
 
         $data = Goods::act($request,$validated);
 
-        return response()->json($data);
+        if ($data === true) 
+        {
+            return redirect('admin/goods/list');
+        }
+        
+        // return response()->json($data);
     }
 
     //

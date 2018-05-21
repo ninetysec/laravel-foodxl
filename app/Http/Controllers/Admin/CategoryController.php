@@ -34,7 +34,7 @@ class CategoryController extends Controller
 
         $data = Category::info($validated);
 
-        $cat = Category::where('parent_id',0)->get();
+        $cat = Category::where('parent_id',0)->where('cat_id','<>',$validated['id'])->get();
 
         return view('admin.category_info',['data' => $data, 'cat' => $cat]);
     }
@@ -53,7 +53,7 @@ class CategoryController extends Controller
         $rules = [
                     'action'     => 'required|string',
                     'id'         => 'integer',
-                    'name'       => 'required|string',
+                    'name'       => 'string',
                     'desc'       => 'string',
                     'parent_id'  => 'integer',
                     'sort_order' => 'integer',
@@ -63,6 +63,11 @@ class CategoryController extends Controller
 
         $data = Category::act($validated);
 
-        return response()->json($data);
+        if ($data === true) 
+        {
+            return redirect('admin/category/list');
+        }
+
+        // return response()->json($data);
     }
 }
