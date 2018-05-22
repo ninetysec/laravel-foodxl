@@ -93,6 +93,13 @@ class CartController extends Controller
         return response()->json($data);
     }
 
+    public function info()
+    {
+        $data = Cart::info();
+
+        return response()->json($data);
+    }
+
     public function act(Request $request)
     {
         $rules = [

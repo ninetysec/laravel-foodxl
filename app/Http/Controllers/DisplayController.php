@@ -42,4 +42,10 @@ class DisplayController extends Controller
     {
         return view('order_info');
     }
+
+    //
+    public function category()
+    {
+        return view('category');
+    }
 }

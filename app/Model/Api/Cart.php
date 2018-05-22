@@ -171,4 +171,10 @@ class Cart extends Model
         }
         return true;
     }
+    public static function info()
+    {
+        $num = self::where('skey', session('key'))->sum('number');
+
+        return ['num' => $num];
+    }
 }

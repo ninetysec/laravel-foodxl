@@ -67,3 +67,39 @@
 
 <!-- Main -->
 <script src="js/main.js"></script>
+
+<script type="text/javascript">
+	// 获取购物车数量
+	function getNum(){
+		$.get("/api/cart/info", function(cart) {
+			// console.log(cat.num);
+			$('#cart span').text(cart.num);
+		});
+	}
+	// 插入导航栏下拉分类
+	function getCatTop(obj){
+		var tmp = `<li><a href="category?id=`+obj.cat_id+`">`+obj.cat_name+`</a></li>`;
+		return tmp;
+	}
+	// 获取URL参数
+	function getQueryVariable(variable)
+	{
+	       var query = window.location.search.substring(1);
+	       var vars = query.split("&");
+	       for (var i=0;i<vars.length;i++) {
+	               var pair = vars[i].split("=");
+	               if(pair[0] == variable){return pair[1];}
+	       }
+	       return(false);
+	}
+	$(function() {
+		$.get("/api/category/list", function(cat) {
+			// console.log(cat);
+			for(var i = 0;i<cat.length;i++){
+				$('nav ul li ul').append(getCatTop(cat[i]));
+			}
+			//$('#cart span').text(cat.num);
+		});
+		getNum();
+	});
+</script>

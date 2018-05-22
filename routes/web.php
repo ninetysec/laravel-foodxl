@@ -61,6 +61,8 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::get('cart', 'DisplayController@cart');
 
+	Route::get('category', 'DisplayController@category');
+
 	Route::get('services', 'DisplayController@services');
 
 	Route::get('order', 'DisplayController@order');
@@ -86,6 +88,8 @@ Route::group(['middleware' => 'web'], function () {
 		Route::get('cart/address', 'CartController@address');
 
 		Route::get('cart/act', 'CartController@act');
+
+		Route::get('cart/info', 'CartController@info');
 
 		Route::get('cart/checkout', 'CartController@checkout');
 

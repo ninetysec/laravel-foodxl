@@ -52,18 +52,16 @@
 		// 需要修改 
 		// http://test.foodxl.fr:8000/api/category/list
 
-		$.ajaxSetup({async : false});
-		$.get("/api/category/list", function(cat) {
-			for(var i = 0;i<cat.length;i++){
-				$('#menu').append(getCat(cat[i]));
-				$.get("/api/category/info?id=" + cat[i]['cat_id'], function(data) {
-					// $('#menu').append(getCat(cat[i]));
-					for(var x = 0;x<data.goods.length;x++) {
-						$('#menu').append(getGoods(data.goods[x]));
-						goods.push(data.goods[x]);
-						if (x == 6) {break;}
-					}
-				});
+		// $.ajaxSetup({async : false});
+		var id = getQueryVariable('id');
+		console.log(id);
+		$.get("/api/category/info?id=" + id, function(cat) {
+			$('#menu').append(getCat(cat.cat));
+			console.log(cat);
+			for(var i = 0;i<cat.goods.length;i++) {
+				$('#menu').append(getGoods(cat.goods[i]));
+				goods.push(cat.goods[i]);
+				// if (x == 6) {break;}
 			}
 		});
 	});

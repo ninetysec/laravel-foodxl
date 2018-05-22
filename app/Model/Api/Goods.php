@@ -20,11 +20,13 @@ class Goods extends Model
     {
         extract($attributes);
 
-        $model = self::where('cat_id',$id)->with('GoodsAttr')->get();
+        $goods = self::where('cat_id',$id)->with('GoodsAttr')->get();
 
-        if ($model->toArray())
+        $cat = Category::where('cat_id',$id)->first();
+
+        if ($goods->toArray())
         {
-            return $model;
+            return ['goods' => $goods, 'cat' => $cat];
         }
 
         return false;
