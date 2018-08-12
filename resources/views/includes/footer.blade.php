@@ -7,7 +7,7 @@
 					<h3>Get In Touch</h3>
 					<ul class="gtco-quick-contact">
 						<li><a href="#"><i class="icon-phone"></i>01.47.94.89.20</a></li>
-						<li><a href="#"><i class="icon-mail2"></i>5 parivs Pierre de Coubertin - 92600 ASNIERES, SUR SEINE</a></li>
+						<li><a href="#"><i class="icon-mail2"></i>5 parvis Pierre de Coubertin - 92600 Asnières-sur-Seine</a></li>
 						<li><a href="#"><i class="icon-chat"></i>foodxl.moshimo@gmail.com</a></li>
 					</ul>
 				</div>
