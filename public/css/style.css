@@ -1709,6 +1709,7 @@ form label {
 }
 
 .fh5co-card-item {
+  height: 530px;
   display: block;
   width: 100%;
   position: relative;
