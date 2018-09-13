@@ -67,10 +67,10 @@
 					<div class="gtco-contact-info">
 						<h3>Contact Information</h3>
 						<ul>
-							<li class="address">198 West 21th Street, <br> Suite 721 New York NY 10016</li>
-							<li class="phone"><a href="tel://1234567920">+ 1235 2355 98</a></li>
-							<li class="email"><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
-							<li class="url"><a href="http://FreeHTML5.co">FreeHTML5.co</a></li>
+							<li class="address">5 parvis Pierre de Coubertin <br/> 92600 Asnières-sur-Seine</li>
+							<li class="phone"><a href=""> 01.47.94.89.20</a></li>
+							<li class="email"><a href="mailto:foodxl.moshimo@gmail.com">foodxl.moshimo@gmail.com</a></li>
+							<li class="url"><a href="/">Foodxl</a></li>
 						</ul>
 					</div>
 

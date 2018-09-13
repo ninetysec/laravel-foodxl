@@ -13,7 +13,7 @@
 			<div class="col-md-12 col-md-offset-0 text-left">
 				<div class="row row-mt-15em">
 					<div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
-						<h1 class="cursive-font">相约在8月！</h1>	
+						<h1 class="cursive-font">Bienvenue</h1>	
 					</div>
 				</div>
 			</div>
@@ -32,12 +32,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">菜品详情</h4>
+        <h4 class="modal-title" id="myModalLabel">Detail</h4>
       </div>
       <div class="modal-body" id="myContent"></div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button id="commande" type="button" class="btn btn-primary">添加购物车</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        <button id="commande" type="button" class="btn btn-primary">Ajouter</button>
       </div>
     </div>
   </div>

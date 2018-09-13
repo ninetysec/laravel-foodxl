@@ -8,14 +8,14 @@
 				<ul>
 					<!--class="active"-->
 					<li class="has-dropdown">
-						<a href="#">分类列表</a>
+						<a href="#">Menu</a>
 						<ul class="dropdown">
 							
 						</ul>
 					</li>
-					<li><a href="cart" id="cart">购物车 <span class="label label-info"></span></a></li>
-					<li><a href="contact">联系我们</a></li>
-					<li class="btn-cta"><a href="#"><span>预定位置</span></a></li>
+					<!-- <li><a href="cart" id="cart">购物车 <span class="label label-info"></span></a></li> -->
+					<li><a href="contact">Contactez-nous</a></li>
+					<li class="btn-cta"><a href="contact"><span>RÉSERVEZ UNE PLACE</span></a></li>
 				</ul>	
 			</div>
 		</div>
