@@ -16,10 +16,11 @@
 
             <div class="panel panel-default">
             	<div class="bs-example">
-		        	<form action="act" method="post" class="form-horizontal">
+		        	<form action="act" method="post" class="form-horizontal" enctype="multipart/form-data">
 		        		@csrf
 		        		<input name="action" value="update" type="hidden" />
 		        		<input name="id" value="{{ $data['cat_id'] }}" type="hidden" />
+		        		<br>
 		        		<div class="form-group">
 		        			<label class="col-md-4 control-label">类名：</label>
 			        		<div class="col-md-4">
@@ -36,7 +37,7 @@
 		        			<label class="col-md-4 control-label">上级：</label>
 			        		<div class="col-md-4">
 			        			<select name='parent_id'>
-			        				<option value="0">顶级分类</option>
+			        				<option value="0">一级分类</option>
 			        				@foreach ($cat as $c)
 			        				<option value="{{ $c['cat_id'] }}" {{ ($data['parent_id'] == $c['cat_id']) ? 'selected' : '' }}>{{ $c['cat_name'] }}</option>
 			        				@endforeach
@@ -50,9 +51,19 @@
 			        		</div>
 			        	</div>
 		        		<div class="form-group">
-		        			<div class="col-md-4 col-md-offset-4">
-				    			<input type="submit" name="submit" class="btn btn-primary" />
-				    		</div>
+		        			<label class="col-md-4 control-label">背景图：</label>
+			        		<div class="col-md-4">
+			        			<input name="image" value="" type="file" accept="image/*" class="form-control">
+			        		</div>
+			        		<small>建议尺寸：1500x720</small>
+			        	</div>
+		        		<div class="form-group" style="text-align: center;">
+		        			@if($data['cat_img'] != '')
+			        			<img src="{{ $data['cat_img'] }}" class="img-thumbnail" width="350">
+		        			@endif
+			        	</div>
+		        		<div class="form-group" style="text-align: center;">
+		        			<input type="submit" name="submit" class="btn btn-primary" />
 				    	</div>
 			    	</form>
 		    	</div>

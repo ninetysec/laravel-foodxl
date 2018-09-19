@@ -3,6 +3,8 @@
 namespace App\Model\Admin;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 use Redirect;
 
 class Category extends Model
@@ -49,16 +51,37 @@ class Category extends Model
         return $model;
     }
 
-    public static function act(array $attributes)
+    public static function act(Request $request, array $attributes)
     {
         extract($attributes);
 
-        if ($action == 'insert')
+        $id = isset($id) ? $id : 0;
+
+        if (is_null($model = self::where('cat_id',$id)->first()))
         {
+            return false;
+        }
+
+        if ($request->hasFile('image'))
+        {
+            $request->file('image');
+
+            $file_name = 'cat_'.time().'.jpg';
+
+            if($request->image->move('./uploads/images/cat/',$file_name)) {
+
+                $path = '/uploads/images/cat/'.$file_name;
+
+            }
+        }
+
+        if ($action == 'insert')
+        { 
             $data = [
                 'cat_name'   => $name,
                 'cat_desc'   => isset($desc) ? $desc : '',
                 'sort_order' => isset($sort_order) ? $sort_order : 0,
+                'cat_img'    => isset($path) ? $path : '',
             ];
 
             if (isset($parent_id) && !is_null(self::where('cat_id',$parent_id)->first())) {$data['parent_id'] = $parent_id;}
@@ -67,13 +90,12 @@ class Category extends Model
         }
         elseif ($action == 'update')
         {
-            $id = isset($id) ? $id : 0;
-
             if (!is_null($model = self::where('cat_id',$id)->first()))
             {
                 $model->cat_name = $name;
                 $model->cat_desc = isset($desc) ? $desc : ' ';
                 $model->sort_order = isset($sort_order) ? $sort_order : 0;
+                $model->cat_img   = isset($path) ? $path : $model->cat_img;
                 if (isset($parent_id) && !is_null(self::where('cat_id',$parent_id)->first()  && $parent_id !== $id)) $model->parent_id = $parent_id;
                 if ($model->save()) return true;
             }
@@ -83,11 +105,14 @@ class Category extends Model
             if (self::where('cat_id',$id)->delete())
             {
                 self::where('parent_id',$id)->update(['parent_id' => 0]);
-                return true;
             }
         }
+        elseif ($action)
+        {
+            self::where('cat_id',$id)->update([$action => $value]);
+        }
 
-        return false;
+        return true;
     }
 
     public function son()

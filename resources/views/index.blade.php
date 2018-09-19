@@ -53,7 +53,7 @@
 		// http://test.foodxl.fr:8000/api/category/list
 
 		$.ajaxSetup({async : false});
-		$.get("/api/category/list", function(cat) {
+		$.get("/api/category/list?index=1", function(cat) {
 			for(var i = 0;i<cat.length;i++){
 				$('#menu').append(getCat(cat[i]));
 				$.get("/api/category/info?id=" + cat[i]['cat_id'], function(data) {

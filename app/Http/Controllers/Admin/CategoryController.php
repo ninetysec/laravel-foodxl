@@ -57,11 +57,12 @@ class CategoryController extends Controller
                     'desc'       => '',
                     'parent_id'  => 'integer',
                     'sort_order' => 'integer',
+                    'value'      => 'integer',
                 ];
 
         $validated = $request->validate($rules);
 
-        $data = Category::act($validated);
+        $data = Category::act($request,$validated);
 
         if ($data === true) 
         {

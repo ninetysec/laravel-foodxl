@@ -22,6 +22,8 @@ class Cart extends Model
         extract($attributes);
         // 获取商品信息
         if (is_null($goods = Goods::where('goods_id', $goods_id)->first())) { return false; }
+        // 点击
+        Goods::where('goods_id', $goods_id)->increment('click');
         // 获取购物车信息，重复相加
         if (!is_null($cart = self::where(['goods_id' => $goods_id, 'skey' => session('key')])->first()))
         {

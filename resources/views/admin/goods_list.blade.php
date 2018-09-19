@@ -6,7 +6,6 @@
     	<div class="table-responsive">
         	<table class="table table-striped">
         		<tr>
-	        		<th>产品ID</th>
 	        		<th>产品名称</th>
 	        		<th>分类</th>
 	        		<th>价格</th>
@@ -16,7 +15,6 @@
 	        	</tr>
 	            @foreach ($data as $goods)
 	            <tr>
-	            	<td>{{ $goods['goods_id'] }}</td>
 	            	<td>{{ $goods['goods_name'] }}</td>
 	            	<td>{{ $goods['cat_name'] }}</td>
 	            	<td><!--<input type="text" name="shop_price" value="{{ $goods['shop_price'] }}" size="2" />-->{{ $goods['shop_price'] }}</td>

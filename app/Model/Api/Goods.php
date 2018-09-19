@@ -24,12 +24,7 @@ class Goods extends Model
 
         $cat = Category::where('cat_id',$id)->first();
 
-        if ($goods->toArray())
-        {
-            return ['goods' => $goods, 'cat' => $cat];
-        }
-
-        return false;
+        return ['goods' => $goods, 'cat' => $cat];
     }
 
     // 

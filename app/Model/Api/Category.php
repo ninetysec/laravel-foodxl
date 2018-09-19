@@ -14,9 +14,13 @@ class Category extends Model
 
     // protected $visible = ['id', 'change', 'reason', 'created_at', 'money', 'user_id', 'user_name', 'level', 'customer', 'customer_id', 'customer_level'];\
     // 
-    public static function index()
+    public static function index(array $attributes)
     {
-    	$model = self::where('parent_id',0)->with('son')->get()->toArray();
+        extract($attributes);
+
+        $where = isset($index) ? ['index' => 1,'parent_id' => 0] : ['parent_id' => 0];
+
+        $model = self::where($where)->with('son')->get();
 
     	return $model;
     }

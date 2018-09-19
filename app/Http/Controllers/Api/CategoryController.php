@@ -10,9 +10,15 @@ use App\Model\Api\Goods;
 class CategoryController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
-        $data = Category::index();
+        $rules = [
+            'index'    => 'integer|min:1'
+        ];
+
+        $validated = $request->validate($rules);
+
+        $data = Category::index($validated);
 
         return response()->json($data);
     }

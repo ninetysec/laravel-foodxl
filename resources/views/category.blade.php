@@ -49,19 +49,23 @@
 <script type="text/javascript">
 	var goods =[];
     $(function() {
-		// 需要修改 
-		// http://test.foodxl.fr:8000/api/category/list
-
-		// $.ajaxSetup({async : false});
 		var id = getQueryVariable('id');
-		console.log(id);
 		$.get("/api/category/info?id=" + id, function(cat) {
+			// 载入分类信息
 			$('#menu').append(getCat(cat.cat));
-			console.log(cat);
-			for(var i = 0;i<cat.goods.length;i++) {
-				$('#menu').append(getGoods(cat.goods[i]));
-				goods.push(cat.goods[i]);
-				// if (x == 6) {break;}
+			// 修改背景图
+			if (cat.cat.cat_img) {
+				$("header").css({"background-image":"url('" + cat.cat.cat_img + "')"});
+			}
+			// 载入产品列表
+			if (JSON.stringify(cat.goods) != "[]") {
+				for(var i = 0;i<cat.goods.length;i++) {
+					$('#menu').append(getGoods(cat.goods[i]));
+					goods.push(cat.goods[i]);
+					// if (x == 6) {break;}
+				}
+			} else {
+				$('#catModel').append(`<p>Pas de nourriture.</p>`);
 			}
 		});
 	});
@@ -72,7 +76,7 @@
 		if(obj){
 			$('#myModal').modal();
 			$('#myContent').html(`
-				<div  class="fh5co-card-item" >
+				<div class="fh5co-card-item">
 					<figure>
 						<img src="`+obj.goods_img+`" alt="Image" class="img-responsive">
 					</figure>
@@ -120,7 +124,7 @@
 
 	function getCat(obj){
 		var tmp = `<div class="row">
-				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+				<div class="col-md-8 col-md-offset-2 text-center gtco-heading" id="catModel">
 					<h2 class="cursive-font primary-color">`+obj.cat_name+`</h2>
 					<p>`+obj.cat_desc+`</p>
 				</div>
