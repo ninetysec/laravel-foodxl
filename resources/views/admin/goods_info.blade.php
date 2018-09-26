@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div style="width: 30%;" class="center-block">
-                            <img src="{{ $data['goods_img'] }}" class="img-responsive" alt="Responsive image" />
+                            <img src="/{{ $data['goods_img'] }}" class="img-responsive" alt="Responsive image" />
                         </div>
                         <div class="form-group">
                             <div class="col-md-4 col-md-offset-4">

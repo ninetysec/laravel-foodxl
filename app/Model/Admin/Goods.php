@@ -5,6 +5,7 @@ namespace App\Model\Admin;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class Goods extends Model
 {
@@ -18,7 +19,7 @@ class Goods extends Model
 
     protected $appends = ['cat_name'];
 
-    // protected $visible = ['id', 'change', 'reason', 'created_at', 'money', 'user_id', 'user_name', 'level', 'customer', 'customer_id', 'customer_level'];\
+    // protected $visible = ['id', 'change', 'reason', 'created_at', 'money', 'user_id', 'user_name', 'level', 'customer', 'customer_id', 'customer_level'];
 
     public static function getList(array $attributes)
     {
@@ -62,15 +63,17 @@ class Goods extends Model
 
         if ($request->hasFile('image')) {
 
-            $request->file('image');
+            $photo = $request->file('image');
 
             $file_name = 'goods_'.time().'.jpg';
 
-            if($request->image->move('./uploads/images/goods/',$file_name)) {
+            $file_path = './uploads/images/goods/';
 
-                $path = '/uploads/images/goods/'.$file_name;
+            $path = $file_path . $file_name;
 
-            }
+            $image = Image::make($photo)->resize(500, 500, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($path);
         }
 
         if ($action == 'insert')
