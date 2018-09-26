@@ -35,7 +35,7 @@
 				<div class="col-md-12">
 					<div class="col-md-6 animate-box">
 					<h3>Get In Touch</h3>
-					<form action="#">
+					<form action="/api/contact/post" method="post">
 						<div class="row form-group">
 							<div class="col-md-12">
 								<label class="sr-only" for="name">Name</label>

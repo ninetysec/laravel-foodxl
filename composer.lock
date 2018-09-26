@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4d733d87cc3ab6bbb0e37a5c2a10e477",
+    "content-hash": "863d1ae1b7f01f6fc04a6ca0b235c9df",
     "packages": [
         {
             "name": "alexcode/laravel-sumup",

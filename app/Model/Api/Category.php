@@ -27,6 +27,6 @@ class Category extends Model
 
     public function son()
     {
-        return $this->hasOne('App\Model\Api\Category', 'parent_id', 'cat_id');
+        return $this->hasMany('App\Model\Api\Category', 'parent_id', 'cat_id');
     }
 }

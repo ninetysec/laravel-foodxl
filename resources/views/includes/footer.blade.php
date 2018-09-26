@@ -81,6 +81,11 @@
 		var tmp = `<li><a href="category?id=`+obj.cat_id+`">`+obj.cat_name+`</a></li>`;
 		return tmp;
 	}
+	// 插入导航栏下拉分类
+	function getCatSon(obj){
+		var tmp = `<li><a href="category?id=`+obj.cat_id+`">&nbsp;&nbsp;&nbsp;&nbsp;|—&nbsp;`+obj.cat_name+`</a></li>`;
+		return tmp;
+	}
 	// 获取URL参数
 	function getQueryVariable(variable)
 	{
@@ -97,6 +102,9 @@
 			// console.log(cat);
 			for(var i = 0;i<cat.length;i++){
 				$('nav ul li ul').append(getCatTop(cat[i]));
+				for (var x = 0; x<cat[i]['son'].length; x++) {
+					$('nav ul li ul').append(getCatSon(cat[i]['son'][x]));
+				}
 			}
 			//$('#cart span').text(cat.num);
 		});

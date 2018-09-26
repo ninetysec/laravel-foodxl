@@ -100,6 +100,8 @@ Route::group(['middleware' => 'web'], function () {
 		Route::get('order/info', 'OrderController@info');
 
 		Route::get('order/search', 'OrderController@search');
+
+		Route::any('contact/post', 'ContactController@post');
 	});
 
 	// 后台登录
