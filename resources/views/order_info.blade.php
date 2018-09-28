@@ -142,9 +142,9 @@
 		function getGoods(obj) {
 			var tmp = `<tr><td>`
 					+obj.goods_name+`</td><td>`
-					+obj.goods_price+` €</td><td>`
+					+obj.goods_price.replace(/,/,".")+` €</td><td>`
 					+obj.goods_number+`</td><td>`
-					+(obj.goods_price*obj.goods_number).toFixed(2)+` €</td></tr>`;
+					+((obj.goods_price*obj.goods_number).toFixed(2)).replace(/,/,".")+` €</td></tr>`;
 			return tmp;
 		}
 
@@ -155,7 +155,7 @@
 					+obj.contact.email+`</li><li>Address：`
 					+obj.contact.address+`</li><li>Time：`
 					+obj.time+`</li><li>Total：<span style="color:red;">`
-					+obj.order_amount+` €</span></li></ul>`;
+					+obj.order_amount.replace(/,/,".")+` €</span></li></ul>`;
 			return tmp;
 		}
 	</script>

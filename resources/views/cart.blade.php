@@ -235,9 +235,9 @@
 			*/
 			var tmp = `<tr><td><input name="id" value='`
 					+obj.id+`' type='hidden'/>`+obj.goods_name+`</td><td>`
-					+obj.price+` €</td><td><input name="number" value='`
+					+obj.price.replace(/,/,".")+` €</td><td><input name="number" value='`
 					+obj.number+`' type='text' size=3/></td><td>`
-					+(obj.price*obj.number).toFixed(2)+` €</td><td>`
+					+((obj.price*obj.number).toFixed(2)).replace(/,/,".")+` €</td><td>`
 					+`<a href="/api/cart/act?action=delete&id=`+obj.id+`" >删除</a></td></tr>`;
 			return tmp;
 		}

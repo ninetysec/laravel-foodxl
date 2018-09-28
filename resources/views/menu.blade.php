@@ -156,9 +156,8 @@
 			var tmp = `<tr><td>`
 					+obj.id+`</td><td>`
 					+obj.goods_name+`</td><td>`
-					+obj.price+`</td><td>`
+					+obj.price.replace(/,/,".")+` €</td><td>`
 					+obj.number+`</td><td>`
-					+obj.price+`</td><td>`
 					+`x</td></tr>`;
 			return tmp;
 		}

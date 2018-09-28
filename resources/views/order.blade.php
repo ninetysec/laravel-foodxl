@@ -145,7 +145,7 @@
 					+obj.order_sn+`</td><td>`
 					+obj.order_status+`</td><td>`
 					+obj.contact.name+`</td><td>`
-					+obj.order_amount+`</td><td>`
+					+obj.order_amount.replace(/,/,".")+` €</td><td>`
 					+obj.add_time+`</td><td>`
 					+`<a href="order_info?id=`+obj.order_id+`">查看</a></td></tr>`;
 			return tmp;

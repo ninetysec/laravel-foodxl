@@ -83,7 +83,7 @@
 					<div class="fh5co-text">
 						<h2>`+obj.goods_name+`</h2>
 						<p>`+obj.goods_desc+`</p>
-						<p><span class="price cursive-font">€`+obj.shop_price+`</span></p>
+						<p><span class="price cursive-font">`+obj.shop_price.replace(/,/,".")+` €</span></p>
 					</div>
 				</div>
 			`);
@@ -115,7 +115,7 @@
 					<div class="fh5co-text">
 						<h2>`+obj.goods_name+`</h2>
 						<p>`+obj.goods_desc+`</p>
-						<p><span class="price cursive-font">€`+obj.shop_price+`</span></p>
+						<p><span class="price cursive-font">`+obj.shop_price.replace(/,/,".")+` €</span></p>
 					</div>
 				</a>
 			</div>`;
