@@ -13,10 +13,10 @@
                     </ul>
                 </div>
             @endif
-            
             <div class="panel panel-default">
             	<div class="bs-example">
-		        	<form action="act" method="post" class="form-horizontal">
+            		<br>
+		        	<form action="act" method="post" class="form-horizontal" enctype="multipart/form-data">
 		        		@csrf
 		        		<input name="action" value="insert" type="hidden" />
 		        		<div class="form-group">
@@ -31,7 +31,6 @@
 			        			<input name="desc" value=" " type="text" class="form-control" />
 			        		</div>
 			        	</div>
-			        	<!--
 		        		<div class="form-group">
 		        			<label class="col-md-4 control-label">上级：</label>
 			        		<div class="col-md-4">
@@ -43,7 +42,6 @@
 			        			</select>
 			        		</div>
 			        	</div>
-			        	-->
 		        		<div class="form-group">
 		        			<label class="col-md-4 control-label">排序：</label>
 			        		<div class="col-md-4">
@@ -51,9 +49,20 @@
 			        		</div>
 			        	</div>
 		        		<div class="form-group">
-		        			<div class="col-md-4 col-md-offset-4">
-				    			<input type="submit" name="submit" class="btn btn-primary" />
-				    		</div>
+		        			<label class="col-md-4 control-label">背景文字：</label>
+			        		<div class="col-md-4">
+			        			<input name="image_text" value="" type="text" class="form-control" />
+			        		</div>
+			        	</div>
+		        		<div class="form-group">
+		        			<label class="col-md-4 control-label">背景图：</label>
+			        		<div class="col-md-4">
+			        			<input name="image" value="" type="file" accept="image/*" class="form-control">
+			        		</div>
+			        		<small>建议尺寸：1500x720</small>
+			        	</div>
+		        		<div class="form-group" style="text-align: center;">
+		        			<input type="submit" name="submit" class="btn btn-primary" />
 				    	</div>
 			    	</form>
 		    	</div>

@@ -57,7 +57,7 @@ class Category extends Model
 
         $id = isset($id) ? $id : 0;
 
-        if (is_null($model = self::where('cat_id',$id)->first()))
+        if (is_null($model = self::where('cat_id',$id)->first()) && $action != 'insert')
         {
             return false;
         }
@@ -76,12 +76,13 @@ class Category extends Model
         }
 
         if ($action == 'insert')
-        { 
+        {
             $data = [
                 'cat_name'   => $name,
                 'cat_desc'   => isset($desc) ? $desc : '',
                 'sort_order' => isset($sort_order) ? $sort_order : 0,
                 'cat_img'    => isset($path) ? $path : '',
+                'cat_text'   => isset($image_text) ? $image_text : '',
             ];
 
             if (isset($parent_id) && !is_null(self::where('cat_id',$parent_id)->first())) {$data['parent_id'] = $parent_id;}
@@ -92,10 +93,11 @@ class Category extends Model
         {
             if (!is_null($model = self::where('cat_id',$id)->first()))
             {
-                $model->cat_name = $name;
-                $model->cat_desc = isset($desc) ? $desc : ' ';
-                $model->sort_order = isset($sort_order) ? $sort_order : 0;
-                $model->cat_img   = isset($path) ? $path : $model->cat_img;
+                $model->cat_name    = $name;
+                $model->cat_desc    = isset($desc) ? $desc : ' ';
+                $model->sort_order  = isset($sort_order) ? $sort_order : 0;
+                $model->cat_img     = isset($path) ? $path : $model->cat_img;
+                $model->cat_text    = isset($image_text) ? $image_text : $model->cat_text;
                 if (isset($parent_id) && !is_null(self::where('cat_id',$parent_id)->first()  && $parent_id !== $id)) $model->parent_id = $parent_id;
                 if ($model->save()) return true;
             }

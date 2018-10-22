@@ -53,9 +53,10 @@
 		$.get("/api/category/info?id=" + id, function(cat) {
 			// 载入分类信息
 			$('#menu').append(getCat(cat.cat));
-			// 修改背景图
+			// 修改背景图、字
 			if (cat.cat.cat_img) {
 				$("header").css({"background-image":"url('" + cat.cat.cat_img + "')"});
+				$(".mt-text .cursive-font").text(cat.cat.cat_text);
 			}
 			// 载入产品列表
 			if (JSON.stringify(cat.goods) != "[]") {

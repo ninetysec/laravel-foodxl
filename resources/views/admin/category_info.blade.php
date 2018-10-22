@@ -51,6 +51,12 @@
 			        		</div>
 			        	</div>
 		        		<div class="form-group">
+		        			<label class="col-md-4 control-label">背景文字：</label>
+			        		<div class="col-md-4">
+			        			<input name="image_text" value="{{ $data['cat_text'] }}" type="text" class="form-control" />
+			        		</div>
+			        	</div>
+		        		<div class="form-group">
 		        			<label class="col-md-4 control-label">背景图：</label>
 			        		<div class="col-md-4">
 			        			<input name="image" value="" type="file" accept="image/*" class="form-control">

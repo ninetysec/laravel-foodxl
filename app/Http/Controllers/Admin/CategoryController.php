@@ -58,6 +58,7 @@ class CategoryController extends Controller
                     'parent_id'  => 'integer',
                     'sort_order' => 'integer',
                     'value'      => 'integer',
+                    'image_text' => 'string',
                 ];
 
         $validated = $request->validate($rules);
