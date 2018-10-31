@@ -68,7 +68,7 @@ class Category extends Model
 
             $file_name = 'cat_'.time().'.jpg';
 
-            if($request->image->move('./uploads/images/cat/',$file_name)) {
+            if ($request->image->move('./uploads/images/cat/',$file_name)) {
 
                 $path = '/uploads/images/cat/'.$file_name;
 

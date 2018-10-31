@@ -20,7 +20,11 @@ class Goods extends Model
     {
         extract($attributes);
 
-        $goods = self::where('cat_id',$id)->with('GoodsAttr')->get();
+        $ids = Category::where('parent_id',$id)->pluck('cat_id');
+
+        $ids[] = $id;
+
+        $goods = self::whereIn('cat_id',$ids)->with('GoodsAttr')->get();
 
         $cat = Category::where('cat_id',$id)->first();
 
